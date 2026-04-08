@@ -3,6 +3,7 @@
 *-----------------------------------------------------------------------------*/
 #include <stdio.h>
 #include <assert.h>
+#include <stdlib.h>
 #include "../../src/rtklib.h"
 
 static double a1[]={
@@ -106,9 +107,21 @@ void utest2(void)
     }
     printf("%s utest2 : OK\n",__FILE__);
 }
+void utest3(void)
+{
+    double a[]={0.0},Q_bad[]={0.0},F[2],s[2];
+    int info;
+
+    info=lambda(0,2,a,Q_bad,F,s); assert(info!=0); if (info==0) exit(1);
+    info=lambda(1,0,a,Q_bad,F,s); assert(info!=0); if (info==0) exit(1);
+    info=lambda(1,2,a,Q_bad,F,s); assert(info!=0); if (info==0) exit(1);
+
+    printf("%s utest3 : OK\n",__FILE__);
+}
 int main(void)
 {
     utest1();
     utest2();
+    utest3();
     return 0;
 }

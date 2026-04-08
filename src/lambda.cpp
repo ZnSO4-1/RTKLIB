@@ -134,6 +134,16 @@ static int search(int n, int m, const double *L, const double *D,
             }
         }
     }
+    if (c>=LOOPMAX) {
+        free(S); free(dist); free(zb); free(z); free(step);
+        fprintf(stderr,"%s : search loop count overflow\n",__FILE__);
+        return -1;
+    }
+    if (nn<m) {
+        free(S); free(dist); free(zb); free(z); free(step);
+        fprintf(stderr,"%s : search failed to find enough candidates\n",__FILE__);
+        return -1;
+    }
     for (i=0;i<m-1;i++) { /* sort by s */
         for (j=i+1;j<m;j++) {
             if (s[i]<s[j]) continue;
@@ -143,10 +153,6 @@ static int search(int n, int m, const double *L, const double *D,
     }
     free(S); free(dist); free(zb); free(z); free(step);
     
-    if (c>=LOOPMAX) {
-        fprintf(stderr,"%s : search loop count overflow\n",__FILE__);
-        return -1;
-    }
     return 0;
 }
 /* lambda/mlambda integer least-square estimation ------------------------------
