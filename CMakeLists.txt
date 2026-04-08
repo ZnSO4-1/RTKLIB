@@ -543,4 +543,12 @@ if(BUILD_TESTING)
             -D "BASELINE_FILE=${CMAKE_CURRENT_SOURCE_DIR}/test/regression/rnx2rtkp_single_07590920.pos"
             -P "${CMAKE_CURRENT_SOURCE_DIR}/test/regression/rnx2rtkp_single.cmake"
     )
+    add_test(NAME regression_rnx2rtkp_kinematic
+        COMMAND "${CMAKE_COMMAND}"
+            -D "RNX2RTKP=$<TARGET_FILE:rnx2rtkp>"
+            -D "SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}"
+            -D "OUTPUT_DIR=${CMAKE_CURRENT_BINARY_DIR}/regression"
+            -D "BASELINE_FILE=${CMAKE_CURRENT_SOURCE_DIR}/test/regression/rnx2rtkp_kinematic_07590920_30400920.pos"
+            -P "${CMAKE_CURRENT_SOURCE_DIR}/test/regression/rnx2rtkp_kinematic.cmake"
+    )
 endif()

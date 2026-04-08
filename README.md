@@ -27,8 +27,8 @@ is intended primarily for algorithm development and command-line workflows.
 - Main command-line programs are covered: `rnx2rtkp`, `rtkrcv`, `convbin`,
   `str2str`, and `pos2kml`.
 - Major utility targets and upstream unit tests are registered with CTest.
-- A first numerical regression baseline is included for `rnx2rtkp` single-point
-  positioning using bundled RINEX sample data.
+- Numerical regression baselines are included for `rnx2rtkp` single-point and
+  relative-kinematic positioning using bundled RINEX sample data.
 - Windows/MSVC Debug and Release builds are checked by GitHub Actions.
 
 ### Build
@@ -89,7 +89,7 @@ license terms, and applicable third-party notices.
 - 默认 CMake 构建使用 C++17。
 - 已覆盖主要命令行程序：`rnx2rtkp`、`rtkrcv`、`convbin`、`str2str`、`pos2kml`。
 - 已将主要辅助工具和上游单元测试注册到 CTest。
-- 已加入第一组 `rnx2rtkp` 单点定位数值回归基线，使用仓库内置 RINEX 示例数据。
+- 已加入 `rnx2rtkp` 单点定位和相对动态定位数值回归基线，使用仓库内置 RINEX 示例数据。
 - GitHub Actions 会在 Windows/MSVC 下验证 Debug 和 Release 构建。
 
 ### 构建

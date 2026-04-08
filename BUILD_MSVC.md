@@ -47,7 +47,8 @@ dialogs during automated test runs.
 - Unit tests: `t_matrix`, `t_time`, `t_coord`, `t_rinex`, `t_lambda`,
   `t_atmos`, `t_misc`, `t_preceph`, `t_gloeph`, `t_geoid`, `t_ppp`,
   `t_ionex`, `t_stec`, `t_tle`.
-- Numerical regression test: `regression_rnx2rtkp_single`.
+- Numerical regression tests: `regression_rnx2rtkp_single`,
+  `regression_rnx2rtkp_kinematic`.
 
 ### Notes
 
@@ -58,6 +59,9 @@ dialogs during automated test runs.
 - `regression_rnx2rtkp_single` runs `rnx2rtkp -p 0` against bundled RINEX
   sample data and compares the generated `.pos` output with the committed
   baseline.
+- `regression_rnx2rtkp_kinematic` runs `rnx2rtkp -p 2` with bundled rover/base
+  RINEX observations to cover the relative positioning and ambiguity-resolution
+  path.
 - `estiono` is kept as an explicit unsupported historical-draft command because
   the upstream source was incomplete. Maintained ionosphere/STEC paths should
   use `geniono` or `genstec`.
@@ -105,12 +109,13 @@ ctest --test-dir build/cmake/msvc-release -C Release --output-on-failure --inter
 - 主要命令行应用：`rnx2rtkp`、`convbin`、`pos2kml`、`str2str`、`rtkrcv`。
 - 辅助工具：`rnx2rtcm`、`simobs`、`gencrc`、`genxor`、`genmsk`、`geniono`、`genstec`、`gengrid`、`rcvdcb`、`estiono`、`diffeph`、`dumpssr`、`convlex`、`dumplex`、`outlexion`、`margelog`。
 - 单元测试：`t_matrix`、`t_time`、`t_coord`、`t_rinex`、`t_lambda`、`t_atmos`、`t_misc`、`t_preceph`、`t_gloeph`、`t_geoid`、`t_ppp`、`t_ionex`、`t_stec`、`t_tle`。
-- 数值回归测试：`regression_rnx2rtkp_single`。
+- 数值回归测试：`regression_rnx2rtkp_single`、`regression_rnx2rtkp_kinematic`。
 
 ### 说明
 
 - 当可选的 `data/geoiddata` 网格文件不存在时，geoid 测试会跳过外部网格文件检查。
 - 部分 smoke test 会故意在无输入参数下运行工具；只有进入预期错误路径时才算通过。
 - `regression_rnx2rtkp_single` 使用仓库内置 RINEX 示例数据运行 `rnx2rtkp -p 0`，并将生成的 `.pos` 输出与已提交基线对比。
+- `regression_rnx2rtkp_kinematic` 使用仓库内置流动站/基准站 RINEX 观测数据运行 `rnx2rtkp -p 2`，覆盖相对定位和模糊度固定路径。
 - `estiono` 保留为明确“不支持”的历史草稿命令，因为上游源码未完成。当前维护的电离层/STEC 路径应使用 `geniono` 或 `genstec`。
 - legacy VCL GUI 工程依赖 Embarcadero/Borland C++Builder，不属于默认 MSVC CMake 构建。

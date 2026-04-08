@@ -35,7 +35,8 @@ sources as C++.
 ### Tests and Tools
 
 - `test/utest`: upstream unit tests registered with CTest.
-- `test/regression`: committed numerical regression baselines.
+- `test/regression`: committed numerical regression baselines for single-point
+  and relative-kinematic `rnx2rtkp` runs.
 - `util`: auxiliary conversion, simulation, ionosphere, STEC, CRC, and
   ephemeris tools.
 
@@ -74,7 +75,7 @@ C++Builder if GUI compatibility is needed.
 ### 测试和工具
 
 - `test/utest`：已注册到 CTest 的上游单元测试。
-- `test/regression`：已提交的数值回归基线。
+- `test/regression`：已提交的 `rnx2rtkp` 单点定位和相对动态定位数值回归基线。
 - `util`：转换、仿真、电离层、STEC、CRC 和星历相关辅助工具。
 
 ### Legacy GUI

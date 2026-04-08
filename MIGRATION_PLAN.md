@@ -24,8 +24,8 @@ algorithm-focused C++ baseline.
 
 ### Next Work
 
-- Expand numerical regression coverage with more RTK, PPP, static, kinematic,
-  and multi-constellation datasets.
+- Expand numerical regression coverage with more PPP, static, longer
+  kinematic, and multi-constellation datasets.
 - Decide whether the public API should continue to preserve C linkage or move
   toward a native C++ API.
 - Add modern C++ wrappers only after the compatibility layer is stable.
@@ -68,7 +68,7 @@ copyright notices, license terms, and applicable third-party notices.
 
 ### 后续工作
 
-- 扩展数值回归覆盖，加入更多 RTK、PPP、静态、动态和多星座数据集。
+- 扩展数值回归覆盖，加入更多 PPP、静态、更长动态和多星座数据集。
 - 决定公共 API 是继续保持 C 链接，还是逐步转向原生 C++ API。
 - 在兼容层稳定后再添加现代 C++ 封装。
 - 持续推进中英双语文档和注释，优先处理公共 API、命令行帮助、配置文件和算法入口。
