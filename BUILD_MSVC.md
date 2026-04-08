@@ -1,113 +1,116 @@
-# MSVC Build Verification / MSVC 编译验证
+# MSVC Build and Regression
 
 ## English
 
-This workspace was locally verified with Microsoft Visual Studio 2022 Build
-Tools:
+This document records the supported Windows/MSVC build path for this fork.
 
-- `cl.exe`: `C:\Microsoft Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe`
-- Environment setup: `C:\Microsoft Visual Studio\2022\VC\Auxiliary\Build\vcvars64.bat`
-- CMake used by VS/VSCode: `C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe`
+### Toolchain
+
+- Compiler: Microsoft Visual Studio 2022 Build Tools / MSVC
+- Build system: CMake
 - Language mode: C++17
+- Test runner: CTest
 
-Verified CMake presets:
+The provided presets are:
 
 - `msvc-debug`
 - `msvc-release`
 
-Verified target groups:
+### Build and Test
+
+Debug:
+
+```powershell
+cmake --preset msvc-debug
+cmake --build --preset msvc-debug
+ctest --test-dir build/cmake/msvc-debug -C Debug --output-on-failure --interactive-debug-mode 0
+```
+
+Release:
+
+```powershell
+cmake --preset msvc-release
+cmake --build --preset msvc-release
+ctest --test-dir build/cmake/msvc-release -C Release --output-on-failure --interactive-debug-mode 0
+```
+
+`--interactive-debug-mode 0` is used to avoid modal MSVC debug assertion
+dialogs during automated test runs.
+
+### Verified Target Groups
 
 - Main command-line applications: `rnx2rtkp`, `convbin`, `pos2kml`,
   `str2str`, `rtkrcv`.
 - Auxiliary tools: `rnx2rtcm`, `simobs`, `gencrc`, `genxor`, `genmsk`,
   `geniono`, `genstec`, `gengrid`, `rcvdcb`, `estiono`, `diffeph`,
   `dumpssr`, `convlex`, `dumplex`, `outlexion`, `margelog`.
-- Unit tests registered through CTest: `t_matrix`, `t_time`, `t_coord`,
-  `t_rinex`, `t_lambda`, `t_atmos`, `t_misc`, `t_preceph`, `t_gloeph`,
-  `t_geoid`, `t_ppp`, `t_ionex`, `t_stec`, `t_tle`.
-- Numerical regression test registered through CTest:
-  `regression_rnx2rtkp_single`.
-- Legacy VCL GUI projects are preserved under `legacy_gui_vcl/app` and exposed
-  through the optional `rtklib_gui_vcl` target. They require Embarcadero
-  C++Builder/BDS and are reported as a clear status target when that toolchain
-  is not available.
+- Unit tests: `t_matrix`, `t_time`, `t_coord`, `t_rinex`, `t_lambda`,
+  `t_atmos`, `t_misc`, `t_preceph`, `t_gloeph`, `t_geoid`, `t_ppp`,
+  `t_ionex`, `t_stec`, `t_tle`.
+- Numerical regression test: `regression_rnx2rtkp_single`.
 
-Regression commands:
+### Notes
 
-```powershell
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe' --preset msvc-debug
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe' --build --preset msvc-debug
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe' --test-dir build\cmake\msvc-debug -C Debug --output-on-failure --interactive-debug-mode 0
-
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe' --preset msvc-release
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe' --build --preset msvc-release
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe' --test-dir build\cmake\msvc-release -C Release --output-on-failure --interactive-debug-mode 0
-```
-
-Notes:
-
-- `--interactive-debug-mode 0` avoids modal MSVC Debug assertion dialogs during
-  automated CTest runs.
 - Geoid tests skip external grid-file checks when optional `data/geoiddata`
   files are not present.
-- `rnx2rtkp`, `convbin`, `pos2kml`, `geniono`, `rcvdcb`, and `estiono` smoke
-  tests intentionally run without input and pass only if the expected error
-  path is reached.
-- `regression_rnx2rtkp_single` runs `rnx2rtkp -p 0` against
-  `test/data/rinex/07590920.05o` and `07590920.05n`, then compares the generated
-  `.pos` output with `test/regression/rnx2rtkp_single_07590920.pos`.
+- Several smoke tests intentionally run tools without input and pass only when
+  the expected error path is reached.
+- `regression_rnx2rtkp_single` runs `rnx2rtkp -p 0` against bundled RINEX
+  sample data and compares the generated `.pos` output with the committed
+  baseline.
 - `estiono` is kept as an explicit unsupported historical-draft command because
-  the upstream source was incomplete; use `geniono` or `genstec` for maintained
-  ionosphere/STEC paths.
+  the upstream source was incomplete. Maintained ionosphere/STEC paths should
+  use `geniono` or `genstec`.
+- Legacy VCL GUI projects require Embarcadero/Borland C++Builder and are not
+  part of the default MSVC CMake build.
 
 ## 中文
 
-本工作区已经使用 Microsoft Visual Studio 2022 Build Tools 做过本地验证：
+本文档记录本分支支持的 Windows/MSVC 构建和回归测试路径。
 
-- `cl.exe`：`C:\Microsoft Visual Studio\2022\VC\Tools\MSVC\14.44.35207\bin\Hostx64\x64\cl.exe`
-- 环境初始化脚本：`C:\Microsoft Visual Studio\2022\VC\Auxiliary\Build\vcvars64.bat`
-- VS/VSCode 使用的 CMake：`C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe`
+### 工具链
+
+- 编译器：Microsoft Visual Studio 2022 Build Tools / MSVC
+- 构建系统：CMake
 - 语言模式：C++17
+- 测试运行器：CTest
 
-已验证的 CMake preset：
+提供的 preset：
 
 - `msvc-debug`
 - `msvc-release`
 
-已验证的目标组：
+### 构建和测试
 
-- 主要命令行程序：`rnx2rtkp`、`convbin`、`pos2kml`、`str2str`、`rtkrcv`。
-- 辅助工具：`rnx2rtcm`、`simobs`、`gencrc`、`genxor`、`genmsk`、
-  `geniono`、`genstec`、`gengrid`、`rcvdcb`、`estiono`、`diffeph`、
-  `dumpssr`、`convlex`、`dumplex`、`outlexion`、`margelog`。
-- 注册到 CTest 的单元测试：`t_matrix`、`t_time`、`t_coord`、`t_rinex`、
-  `t_lambda`、`t_atmos`、`t_misc`、`t_preceph`、`t_gloeph`、`t_geoid`、
-  `t_ppp`、`t_ionex`、`t_stec`、`t_tle`。
-- 注册到 CTest 的数值回归测试：`regression_rnx2rtkp_single`。
-- legacy VCL GUI 工程保留在 `legacy_gui_vcl/app` 下，并通过可选的
-  `rtklib_gui_vcl` 目标暴露。它们需要 Embarcadero C++Builder/BDS；当当前环境
-  没有该工具链时，构建会给出明确状态提示。
-
-回归命令：
+Debug：
 
 ```powershell
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe' --preset msvc-debug
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe' --build --preset msvc-debug
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe' --test-dir build\cmake\msvc-debug -C Debug --output-on-failure --interactive-debug-mode 0
-
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe' --preset msvc-release
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe' --build --preset msvc-release
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe' --test-dir build\cmake\msvc-release -C Release --output-on-failure --interactive-debug-mode 0
+cmake --preset msvc-debug
+cmake --build --preset msvc-debug
+ctest --test-dir build/cmake/msvc-debug -C Debug --output-on-failure --interactive-debug-mode 0
 ```
 
-说明：
+Release：
 
-- `--interactive-debug-mode 0` 可以避免自动化 CTest 中弹出 MSVC Debug 断言对话框。
-- 当可选的 `data/geoiddata` 文件不存在时，geoid 测试会跳过外部网格文件检查。
-- `rnx2rtkp`、`convbin`、`pos2kml`、`geniono`、`rcvdcb`、`estiono` 的 smoke
-  test 会故意在无输入参数下运行；只有进入预期错误路径时才算通过。
-- `regression_rnx2rtkp_single` 会用 `test/data/rinex/07590920.05o` 和
-  `07590920.05n` 运行 `rnx2rtkp -p 0`，再将生成的 `.pos` 输出与
-  `test/regression/rnx2rtkp_single_07590920.pos` 对比。
-- `estiono` 保留为明确的“不支持历史草稿”命令，因为上游源码并未完成；当前维护的
-  电离层/STEC 路径请使用 `geniono` 或 `genstec`。
+```powershell
+cmake --preset msvc-release
+cmake --build --preset msvc-release
+ctest --test-dir build/cmake/msvc-release -C Release --output-on-failure --interactive-debug-mode 0
+```
+
+`--interactive-debug-mode 0` 用于避免自动化测试过程中弹出 MSVC Debug 断言对话框。
+
+### 已覆盖目标
+
+- 主要命令行应用：`rnx2rtkp`、`convbin`、`pos2kml`、`str2str`、`rtkrcv`。
+- 辅助工具：`rnx2rtcm`、`simobs`、`gencrc`、`genxor`、`genmsk`、`geniono`、`genstec`、`gengrid`、`rcvdcb`、`estiono`、`diffeph`、`dumpssr`、`convlex`、`dumplex`、`outlexion`、`margelog`。
+- 单元测试：`t_matrix`、`t_time`、`t_coord`、`t_rinex`、`t_lambda`、`t_atmos`、`t_misc`、`t_preceph`、`t_gloeph`、`t_geoid`、`t_ppp`、`t_ionex`、`t_stec`、`t_tle`。
+- 数值回归测试：`regression_rnx2rtkp_single`。
+
+### 说明
+
+- 当可选的 `data/geoiddata` 网格文件不存在时，geoid 测试会跳过外部网格文件检查。
+- 部分 smoke test 会故意在无输入参数下运行工具；只有进入预期错误路径时才算通过。
+- `regression_rnx2rtkp_single` 使用仓库内置 RINEX 示例数据运行 `rnx2rtkp -p 0`，并将生成的 `.pos` 输出与已提交基线对比。
+- `estiono` 保留为明确“不支持”的历史草稿命令，因为上游源码未完成。当前维护的电离层/STEC 路径应使用 `geniono` 或 `genstec`。
+- legacy VCL GUI 工程依赖 Embarcadero/Borland C++Builder，不属于默认 MSVC CMake 构建。

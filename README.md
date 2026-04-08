@@ -1,112 +1,128 @@
-# RTKLIB C++ Migration / RTKLIB C++ 迁移版
+# RTKLIB C++ Algorithm Fork
+
+[![Windows MSVC](https://github.com/ZnSO4-1/RTKLIB/actions/workflows/windows-msvc.yml/badge.svg)](https://github.com/ZnSO4-1/RTKLIB/actions/workflows/windows-msvc.yml)
 
 ## English
 
-This repository is a downstream workspace derived from RTKLIB 2.4.2 p13. The
-current goal is to prepare the codebase for further modification,
-optimization, and open source publication in a new GitHub repository.
+This repository is an algorithm-focused downstream fork of RTKLIB 2.4.2 p13.
+It keeps the upstream GNSS positioning algorithms as the foundation while
+modernizing the source layout and build workflow for further C++ development.
 
-Current focus:
+The default tree focuses on:
 
-- Preserve upstream RTKLIB license terms and attribution.
-- Keep all migrated C sources as C++ sources.
-- Provide a CMake/VSCode workflow for local MSVC builds.
-- Cover portable command-line applications, auxiliary tools, and unit tests
-  with CTest regression checks.
-- Run Windows/MSVC CI through GitHub Actions.
-- Add bilingual Chinese/English documentation incrementally.
+- RTKLIB core positioning algorithms in `src`;
+- command-line applications in `app`;
+- auxiliary tools in `util`;
+- unit and numerical regression tests in `test`;
+- CMake, VSCode, and Windows/MSVC GitHub Actions coverage.
 
-Important directories:
+The original Windows VCL GUI applications are preserved under
+`legacy_gui_vcl/app`. They are not part of the default build because this fork
+is intended primarily for algorithm development and command-line workflows.
 
-- `src`: core RTKLIB positioning library.
-- `src/rcv`: receiver raw-data decoders.
-- `app`: command-line applications kept in the default algorithm-focused tree.
-- `legacy_gui_vcl`: original Windows VCL GUI applications moved out of the
-  default build path.
-- `app/rnx2rtkp`, `app/rtkrcv`, `app/convbin`, `app/str2str`, `app/pos2kml`:
-  main command-line applications.
-- `test`: unit tests and test data.
-- `util`: auxiliary tools.
-- `doc`: upstream manual and release notes.
-- `data`: sample data.
+### Current Status
 
-Licensing:
+- Tracked C source files have been migrated from `.c` to `.cpp`.
+- The default CMake build uses C++17.
+- Main command-line programs are covered: `rnx2rtkp`, `rtkrcv`, `convbin`,
+  `str2str`, and `pos2kml`.
+- Major utility targets and upstream unit tests are registered with CTest.
+- A first numerical regression baseline is included for `rnx2rtkp` single-point
+  positioning using bundled RINEX sample data.
+- Windows/MSVC Debug and Release builds are checked by GitHub Actions.
 
-RTKLIB is distributed under the BSD 2-clause license with additional upstream
-clauses described in `LICENSE` and the original `readme.txt`. Downstream
-redistribution should retain the original copyright notice, license terms, and
-applicable third-party notices. This engineering summary is not legal advice.
+### Build
 
-Build and regression:
-
-Use the MSVC presets from PowerShell or VSCode:
+On Windows with Visual Studio 2022 Build Tools:
 
 ```powershell
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe' --preset msvc-debug
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe' --build --preset msvc-debug
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe' --test-dir build\cmake\msvc-debug -C Debug --output-on-failure --interactive-debug-mode 0
+cmake --preset msvc-debug
+cmake --build --preset msvc-debug
+ctest --test-dir build/cmake/msvc-debug -C Debug --output-on-failure --interactive-debug-mode 0
 ```
 
-VSCode can run the default build task with `Ctrl+Shift+B`.
+Release build:
 
-GitHub Actions:
+```powershell
+cmake --preset msvc-release
+cmake --build --preset msvc-release
+ctest --test-dir build/cmake/msvc-release -C Release --output-on-failure --interactive-debug-mode 0
+```
 
-The workflow in `.github/workflows/windows-msvc.yml` builds and tests both
-`msvc-debug` and `msvc-release`.
+VSCode users can run the default build task with `Ctrl+Shift+B`.
 
-VCL GUI applications are preserved under `legacy_gui_vcl/app`. They are not part
-of the default algorithm-focused build. If Embarcadero C++Builder/BDS is
-installed, they are exposed through the optional `rtklib_gui_vcl` CMake target.
+### Repository Layout
+
+- `src`: core RTKLIB library and positioning algorithms.
+- `src/rcv`: receiver raw-data decoders.
+- `app`: command-line applications.
+- `util`: auxiliary conversion, simulation, ionosphere, and test tools.
+- `test`: unit tests, sample test data, and regression baselines.
+- `data`: receiver command examples and sample data.
+- `doc`: upstream manual and release notes.
+- `legacy_gui_vcl`: preserved Windows VCL GUI applications.
+
+### Licensing
+
+This fork is derived from RTKLIB by T. Takasu and contributors. The upstream
+license terms are retained in `LICENSE`, `NOTICE`, and the original
+`readme.txt`. Redistribution should preserve upstream copyright notices,
+license terms, and applicable third-party notices.
 
 ## 中文
 
-本仓库是基于 RTKLIB 2.4.2 p13 派生的下游工作区。当前目标是在该仓库基础上
-继续修改和优化，并为后续发布到你自己的 GitHub 开源仓库做准备。
+本仓库是基于 RTKLIB 2.4.2 p13 的算法主线分支。它以 RTKLIB 上游 GNSS 定位算法为基础，同时整理源码结构和构建流程，为后续 C++ 化开发、算法优化和自动化回归测试提供更稳定的基线。
 
-当前重点：
+默认主线聚焦于：
 
-- 保留上游 RTKLIB 的许可证条款和署名信息。
-- 将已迁移的 C 源码保持为 C++ 源码。
-- 提供可在本机 MSVC 下使用的 CMake/VSCode 构建流程。
-- 用 CTest 覆盖可移植的命令行程序、辅助工具和单元测试。
-- 通过 GitHub Actions 运行 Windows/MSVC CI。
-- 逐步补充中英双语文档。
+- `src` 中的 RTKLIB 核心定位算法；
+- `app` 中的命令行程序；
+- `util` 中的辅助工具；
+- `test` 中的单元测试和数值回归测试；
+- CMake、VSCode 和 Windows/MSVC GitHub Actions 构建验证。
 
-重要目录：
+原始 Windows VCL 图形界面应用已保留在 `legacy_gui_vcl/app` 下。它们不属于默认构建目标，因为本分支主要面向算法开发和命令行工作流。
 
-- `src`：RTKLIB 核心定位库。
-- `src/rcv`：接收机原始数据解码模块。
-- `app`：默认算法主线中的命令行应用程序。
-- `legacy_gui_vcl`：从默认构建路径中移出的原始 Windows VCL GUI 应用。
-- `app/rnx2rtkp`、`app/rtkrcv`、`app/convbin`、`app/str2str`、`app/pos2kml`：
-  主要命令行程序。
-- `test`：单元测试和测试数据。
-- `util`：辅助工具。
-- `doc`：上游手册和发布说明。
-- `data`：示例数据。
+### 当前状态
 
-许可说明：
+- 已将受 Git 跟踪的 C 源文件从 `.c` 迁移为 `.cpp`。
+- 默认 CMake 构建使用 C++17。
+- 已覆盖主要命令行程序：`rnx2rtkp`、`rtkrcv`、`convbin`、`str2str`、`pos2kml`。
+- 已将主要辅助工具和上游单元测试注册到 CTest。
+- 已加入第一组 `rnx2rtkp` 单点定位数值回归基线，使用仓库内置 RINEX 示例数据。
+- GitHub Actions 会在 Windows/MSVC 下验证 Debug 和 Release 构建。
 
-RTKLIB 按 BSD 2-clause license 以及上游额外条款发布，具体见 `LICENSE` 和原始
-`readme.txt`。下游再发布时应保留原始版权声明、许可证条款以及适用的第三方声明。
-本说明是工程层面的总结，不构成法律意见。
+### 构建
 
-构建和回归：
-
-可以在 PowerShell 或 VSCode 中使用 MSVC preset：
+在安装 Visual Studio 2022 Build Tools 的 Windows 环境中：
 
 ```powershell
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe' --preset msvc-debug
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe' --build --preset msvc-debug
-& 'C:\Microsoft Visual Studio\2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\ctest.exe' --test-dir build\cmake\msvc-debug -C Debug --output-on-failure --interactive-debug-mode 0
+cmake --preset msvc-debug
+cmake --build --preset msvc-debug
+ctest --test-dir build/cmake/msvc-debug -C Debug --output-on-failure --interactive-debug-mode 0
 ```
 
-在 VSCode 中可以按 `Ctrl+Shift+B` 运行默认构建任务。
+Release 构建：
 
-GitHub Actions：
+```powershell
+cmake --preset msvc-release
+cmake --build --preset msvc-release
+ctest --test-dir build/cmake/msvc-release -C Release --output-on-failure --interactive-debug-mode 0
+```
 
-`.github/workflows/windows-msvc.yml` 工作流会构建并测试 `msvc-debug` 和
-`msvc-release`。
+VSCode 用户可以通过 `Ctrl+Shift+B` 运行默认构建任务。
 
-VCL GUI 应用保留在 `legacy_gui_vcl/app` 下，不属于默认算法主线构建。如果安装了
-Embarcadero C++Builder/BDS，可通过可选的 `rtklib_gui_vcl` CMake 目标调用。
+### 仓库结构
+
+- `src`：RTKLIB 核心库和定位算法。
+- `src/rcv`：接收机原始数据解码模块。
+- `app`：命令行应用程序。
+- `util`：转换、仿真、电离层和测试等辅助工具。
+- `test`：单元测试、测试数据和回归基线。
+- `data`：接收机命令示例和示例数据。
+- `doc`：上游手册和发布说明。
+- `legacy_gui_vcl`：保留的 Windows VCL 图形界面应用。
+
+### 许可
+
+本分支派生自 T. Takasu 及贡献者维护的 RTKLIB。上游许可条款保留在 `LICENSE`、`NOTICE` 和原始 `readme.txt` 中。再发布时应保留上游版权声明、许可条款以及适用的第三方声明。
