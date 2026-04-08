@@ -1,24 +1,26 @@
 # makefile for rnx2rtkp
+CXX ?= g++
 
+CC := $(CXX)
 BINDIR  = /usr/local/bin
 SRC     = ../../../src
 
 OPTS    = -DTRACE -DENAGLO -DENAQZS -DENAGAL -DNFREQ=3
 
 # for no lapack
-CFLAGS  = -Wall -O3 -ansi -pedantic -Wno-unused-but-set-variable -I$(SRC) $(OPTS) -g
+CXXFLAGS  = -Wall -O3 -std=c++11 -pedantic -Wno-unused-but-set-variable -I$(SRC) $(OPTS) -g
 LDLIBS  = -lm -lrt
 
-#CFLAGS  = -Wall -O3 -ansi -pedantic -Wno-unused-but-set-variable -I$(SRC) -DLAPACK $(OPTS)
+#CXXFLAGS  = -Wall -O3 -std=c++11 -pedantic -Wno-unused-but-set-variable -I$(SRC) -DLAPACK $(OPTS)
 #LDLIBS  = -lm -lrt -llapack -lblas
 
 # for gprof
-#CFLAGS  = -Wall -O3 -ansi -pedantic -Wno-unused-but-set-variable -I$(SRC) -DLAPACK $(OPTS) -pg
+#CXXFLAGS  = -Wall -O3 -std=c++11 -pedantic -Wno-unused-but-set-variable -I$(SRC) -DLAPACK $(OPTS) -pg
 #LDLIBS  = -lm -lrt -llapack -lblas -pg
 
 # for mkl
 #MKLDIR  = /opt/intel/mkl
-#CFLAGS  = -O3 -ansi -pedantic -Wno-unused-but-set-variable -I$(SRC) $(OPTS) -DMKL
+#CXXFLAGS  = -O3 -std=c++11 -pedantic -Wno-unused-but-set-variable -I$(SRC) $(OPTS) -DMKL
 #LDLIBS  = -L$(MKLDIR)/lib/intel64 -lm -lrt -lmkl_core -lmkl_intel_lp64 -lmkl_gnu_thread -liomp5 -lpthread
 
 all        : rnx2rtkp
@@ -26,48 +28,48 @@ rnx2rtkp   : rnx2rtkp.o rtkcmn.o rinex.o rtkpos.o postpos.o solution.o
 rnx2rtkp   : lambda.o geoid.o sbas.o preceph.o pntpos.o ephemeris.o options.o
 rnx2rtkp   : ppp.o ppp_ar.o rtcm.o rtcm2.o rtcm3.o rtcm3e.o ionex.o qzslex.o
 
-rnx2rtkp.o : ../rnx2rtkp.c
-	$(CC) -c $(CFLAGS) ../rnx2rtkp.c
-rtkcmn.o   : $(SRC)/rtkcmn.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtkcmn.c
-rinex.o    : $(SRC)/rinex.c
-	$(CC) -c $(CFLAGS) $(SRC)/rinex.c
-rtkpos.o   : $(SRC)/rtkpos.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtkpos.c
-postpos.o  : $(SRC)/postpos.c
-	$(CC) -c $(CFLAGS) $(SRC)/postpos.c
-solution.o : $(SRC)/solution.c
-	$(CC) -c $(CFLAGS) $(SRC)/solution.c
-lambda.o   : $(SRC)/lambda.c
-	$(CC) -c $(CFLAGS) $(SRC)/lambda.c
-geoid.o    : $(SRC)/geoid.c
-	$(CC) -c $(CFLAGS) $(SRC)/geoid.c
-sbas.o     : $(SRC)/sbas.c
-	$(CC) -c $(CFLAGS) $(SRC)/sbas.c
-preceph.o  : $(SRC)/preceph.c
-	$(CC) -c $(CFLAGS) $(SRC)/preceph.c
-pntpos.o   : $(SRC)/pntpos.c
-	$(CC) -c $(CFLAGS) $(SRC)/pntpos.c
-ephemeris.o: $(SRC)/ephemeris.c
-	$(CC) -c $(CFLAGS) $(SRC)/ephemeris.c
-options.o  : $(SRC)/options.c
-	$(CC) -c $(CFLAGS) $(SRC)/options.c
-ppp.o      : $(SRC)/ppp.c
-	$(CC) -c $(CFLAGS) $(SRC)/ppp.c
-ppp_ar.o   : $(SRC)/ppp_ar.c
-	$(CC) -c $(CFLAGS) $(SRC)/ppp_ar.c
-rtcm.o     : $(SRC)/rtcm.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm.c
-rtcm2.o    : $(SRC)/rtcm2.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm2.c
-rtcm3.o    : $(SRC)/rtcm3.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm3.c
-rtcm3e.o   : $(SRC)/rtcm3e.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm3e.c
-ionex.o    : $(SRC)/ionex.c
-	$(CC) -c $(CFLAGS) $(SRC)/ionex.c
-qzslex.o   : $(SRC)/qzslex.c
-	$(CC) -c $(CFLAGS) $(SRC)/qzslex.c
+rnx2rtkp.o : ../rnx2rtkp.cpp
+	$(CXX) -c $(CXXFLAGS) ../rnx2rtkp.cpp
+rtkcmn.o   : $(SRC)/rtkcmn.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtkcmn.cpp
+rinex.o    : $(SRC)/rinex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rinex.cpp
+rtkpos.o   : $(SRC)/rtkpos.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtkpos.cpp
+postpos.o  : $(SRC)/postpos.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/postpos.cpp
+solution.o : $(SRC)/solution.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/solution.cpp
+lambda.o   : $(SRC)/lambda.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/lambda.cpp
+geoid.o    : $(SRC)/geoid.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/geoid.cpp
+sbas.o     : $(SRC)/sbas.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/sbas.cpp
+preceph.o  : $(SRC)/preceph.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/preceph.cpp
+pntpos.o   : $(SRC)/pntpos.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/pntpos.cpp
+ephemeris.o: $(SRC)/ephemeris.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/ephemeris.cpp
+options.o  : $(SRC)/options.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/options.cpp
+ppp.o      : $(SRC)/ppp.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/ppp.cpp
+ppp_ar.o   : $(SRC)/ppp_ar.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/ppp_ar.cpp
+rtcm.o     : $(SRC)/rtcm.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm.cpp
+rtcm2.o    : $(SRC)/rtcm2.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm2.cpp
+rtcm3.o    : $(SRC)/rtcm3.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm3.cpp
+rtcm3e.o   : $(SRC)/rtcm3e.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm3e.cpp
+ionex.o    : $(SRC)/ionex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/ionex.cpp
+qzslex.o   : $(SRC)/qzslex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/qzslex.cpp
 
 rnx2rtkp.o : $(SRC)/rtklib.h
 rtkcmn.o   : $(SRC)/rtklib.h

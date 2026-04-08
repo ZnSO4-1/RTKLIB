@@ -1,26 +1,28 @@
 # makefile for rnx2rtcm
+CXX ?= g++
 
+CC := $(CXX)
 BINDIR = /usr/local/bin
 SRC    = ../../src
-CFLAGS = -Wall -O3 -ansi -pedantic -I$(SRC) -DTRACE -DENAGLO -DENAGAL -DENAQZS -DNFREQ=3 -DNEXOBS=3
+CXXFLAGS = -Wall -O3 -std=c++11 -pedantic -I$(SRC) -DTRACE -DENAGLO -DENAGAL -DENAQZS -DNFREQ=3 -DNEXOBS=3
 LDLIBS  = -lm
 
 rnx2rtcm   : rnx2rtcm.o rtkcmn.o rinex.o rtcm.o rtcm2.o rtcm3.o rtcm3e.o
 
-rnx2rtcm.o : rnx2rtcm.c
-	$(CC) -c $(CFLAGS) rnx2rtcm.c
-rtkcmn.o   : $(SRC)/rtkcmn.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtkcmn.c
-rinex.o    : $(SRC)/rinex.c
-	$(CC) -c $(CFLAGS) $(SRC)/rinex.c
-rtcm.o     : $(SRC)/rtcm.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm.c
-rtcm2.o    : $(SRC)/rtcm2.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm2.c
-rtcm3.o    : $(SRC)/rtcm3.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm3.c
-rtcm3e.o   : $(SRC)/rtcm3e.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm3e.c
+rnx2rtcm.o : rnx2rtcm.cpp
+	$(CXX) -c $(CXXFLAGS) rnx2rtcm.cpp
+rtkcmn.o   : $(SRC)/rtkcmn.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtkcmn.cpp
+rinex.o    : $(SRC)/rinex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rinex.cpp
+rtcm.o     : $(SRC)/rtcm.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm.cpp
+rtcm2.o    : $(SRC)/rtcm2.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm2.cpp
+rtcm3.o    : $(SRC)/rtcm3.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm3.cpp
+rtcm3e.o   : $(SRC)/rtcm3e.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm3e.cpp
 
 install:
 	cp rnx2rtcm $(BINDIR)

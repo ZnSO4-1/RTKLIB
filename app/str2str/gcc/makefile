@@ -1,5 +1,7 @@
 # makefile for str2str
+CXX ?= g++
 
+CC := $(CXX)
 BINDIR = /usr/local/bin
 SRC    = ../../../src
 
@@ -8,7 +10,7 @@ SRC    = ../../../src
 CTARGET=
 
 OPTION = -DENAGLO -DENAGAL -DENAQZS -DENACMP -DTRACE -DNFREQ=3 -DNEXOBS=3
-CFLAGS = -Wall -O3 -ansi -pedantic -Wno-unused-but-set-variable -I$(SRC) $(OPTION) $(CTARGET) -g
+CXXFLAGS = -Wall -O3 -std=c++11 -pedantic -Wno-unused-but-set-variable -I$(SRC) $(OPTION) $(CTARGET) -g
 LDLIBS  = -lm -lrt -lpthread
 
 all        : str2str
@@ -16,52 +18,52 @@ str2str    : str2str.o stream.o rtkcmn.o solution.o sbas.o geoid.o
 str2str    : rcvraw.o novatel.o ublox.o ss2.o crescent.o skytraq.o gw10.o javad.o
 str2str    : nvs.o binex.o rt17.o rtcm.o rtcm2.o rtcm3.o rtcm3e.o preceph.o streamsvr.o
 
-str2str.o  : ../str2str.c
-	$(CC) -c $(CFLAGS) ../str2str.c
-stream.o   : $(SRC)/stream.c
-	$(CC) -c $(CFLAGS) $(SRC)/stream.c
-streamsvr.o: $(SRC)/streamsvr.c
-	$(CC) -c $(CFLAGS) $(SRC)/streamsvr.c
-rtkcmn.o   : $(SRC)/rtkcmn.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtkcmn.c
-solution.o : $(SRC)/solution.c
-	$(CC) -c $(CFLAGS) $(SRC)/solution.c
-sbas.o     : $(SRC)/sbas.c
-	$(CC) -c $(CFLAGS) $(SRC)/sbas.c
-geoid.o    : $(SRC)/geoid.c
-	$(CC) -c $(CFLAGS) $(SRC)/geoid.c
-rcvraw.o   : $(SRC)/rcvraw.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcvraw.c
-novatel.o  : $(SRC)/rcv/novatel.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/novatel.c
-ublox.o    : $(SRC)/rcv/ublox.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/ublox.c
-ss2.o      : $(SRC)/rcv/ss2.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/ss2.c
-crescent.o : $(SRC)/rcv/crescent.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/crescent.c
-skytraq.o  : $(SRC)/rcv/skytraq.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/skytraq.c
-gw10.o     : $(SRC)/rcv/gw10.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/gw10.c
-javad.o    : $(SRC)/rcv/javad.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/javad.c
-nvs.o      : $(SRC)/rcv/nvs.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/nvs.c
-binex.o    : $(SRC)/rcv/binex.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/binex.c
-rt17.o     : $(SRC)/rcv/rt17.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/rt17.c
-rtcm.o     : $(SRC)/rtcm.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm.c
-rtcm2.o    : $(SRC)/rtcm2.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm2.c
-rtcm3.o    : $(SRC)/rtcm3.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm3.c
-rtcm3e.o   : $(SRC)/rtcm3e.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm3e.c
-preceph.o  : $(SRC)/preceph.c
-	$(CC) -c $(CFLAGS) $(SRC)/preceph.c
+str2str.o  : ../str2str.cpp
+	$(CXX) -c $(CXXFLAGS) ../str2str.cpp
+stream.o   : $(SRC)/stream.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/stream.cpp
+streamsvr.o: $(SRC)/streamsvr.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/streamsvr.cpp
+rtkcmn.o   : $(SRC)/rtkcmn.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtkcmn.cpp
+solution.o : $(SRC)/solution.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/solution.cpp
+sbas.o     : $(SRC)/sbas.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/sbas.cpp
+geoid.o    : $(SRC)/geoid.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/geoid.cpp
+rcvraw.o   : $(SRC)/rcvraw.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcvraw.cpp
+novatel.o  : $(SRC)/rcv/novatel.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/novatel.cpp
+ublox.o    : $(SRC)/rcv/ublox.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/ublox.cpp
+ss2.o      : $(SRC)/rcv/ss2.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/ss2.cpp
+crescent.o : $(SRC)/rcv/crescent.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/crescent.cpp
+skytraq.o  : $(SRC)/rcv/skytraq.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/skytraq.cpp
+gw10.o     : $(SRC)/rcv/gw10.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/gw10.cpp
+javad.o    : $(SRC)/rcv/javad.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/javad.cpp
+nvs.o      : $(SRC)/rcv/nvs.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/nvs.cpp
+binex.o    : $(SRC)/rcv/binex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/binex.cpp
+rt17.o     : $(SRC)/rcv/rt17.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/rt17.cpp
+rtcm.o     : $(SRC)/rtcm.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm.cpp
+rtcm2.o    : $(SRC)/rtcm2.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm2.cpp
+rtcm3.o    : $(SRC)/rtcm3.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm3.cpp
+rtcm3e.o   : $(SRC)/rtcm3e.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm3e.cpp
+preceph.o  : $(SRC)/preceph.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/preceph.cpp
 
 str2str.o  : $(SRC)/rtklib.h
 stream.o   : $(SRC)/rtklib.h

@@ -1,5 +1,7 @@
 # makefile for rtkrcv
+CXX ?= g++
 
+CC := $(CXX)
 BINDIR = /usr/local/bin
 SRC    = ../../../src
 
@@ -7,7 +9,7 @@ SRC    = ../../../src
 #CTARGET= -mfpu=neon -mfloat-abi=softfp -ffast-math
 CTARGET= -DENAGLO -DENAQZS -DENACMP -DNFREQ=3
 
-CFLAGS = -Wall -O3 -ansi -pedantic -Wno-unused-but-set-variable -I$(SRC) -I.. -DTRACE $(CTARGET) -g
+CXXFLAGS = -Wall -O3 -std=c++11 -pedantic -Wno-unused-but-set-variable -I$(SRC) -I.. -DTRACE $(CTARGET) -g
 LDLIBS  = -lm -lrt -lpthread
 
 all        : rtkrcv
@@ -16,74 +18,74 @@ rtkrcv     : sbas.o stream.o rcvraw.o rtcm.o preceph.o options.o pntpos.o ppp.o 
 rtkrcv     : novatel.o ublox.o ss2.o crescent.o skytraq.o gw10.o javad.o nvs.o binex.o
 rtkrcv     : rt17.o ephemeris.o rinex.o ionex.o rtcm2.o rtcm3.o rtcm3e.o qzslex.o
 
-rtkrcv.o   : ../rtkrcv.c
-	$(CC) -c $(CFLAGS) ../rtkrcv.c
-vt.o       : ../vt.c
-	$(CC) -c $(CFLAGS) ../vt.c
-rtkcmn.o   : $(SRC)/rtkcmn.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtkcmn.c
-rtksvr.o   : $(SRC)/rtksvr.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtksvr.c
-rtkpos.o   : $(SRC)/rtkpos.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtkpos.c
-geoid.o    : $(SRC)/geoid.c
-	$(CC) -c $(CFLAGS) $(SRC)/geoid.c
-solution.o : $(SRC)/solution.c
-	$(CC) -c $(CFLAGS) $(SRC)/solution.c
-lambda.o   : $(SRC)/lambda.c
-	$(CC) -c $(CFLAGS) $(SRC)/lambda.c
-sbas.o     : $(SRC)/sbas.c
-	$(CC) -c $(CFLAGS) $(SRC)/sbas.c
-stream.o   : $(SRC)/stream.c
-	$(CC) -c $(CFLAGS) $(SRC)/stream.c
-rcvraw.o : $(SRC)/rcvraw.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcvraw.c
-rtcm.o     : $(SRC)/rtcm.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm.c
-rtcm2.o    : $(SRC)/rtcm2.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm2.c
-rtcm3.o    : $(SRC)/rtcm3.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm3.c
-rtcm3e.o   : $(SRC)/rtcm3e.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm3e.c
-preceph.o  : $(SRC)/preceph.c
-	$(CC) -c $(CFLAGS) $(SRC)/preceph.c
-options.o  : $(SRC)/options.c
-	$(CC) -c $(CFLAGS) $(SRC)/options.c
-pntpos.o   : $(SRC)/pntpos.c
-	$(CC) -c $(CFLAGS) $(SRC)/pntpos.c
-ppp.o      : $(SRC)/ppp.c
-	$(CC) -c $(CFLAGS) $(SRC)/ppp.c
-ppp_ar.o   : $(SRC)/ppp_ar.c
-	$(CC) -c $(CFLAGS) $(SRC)/ppp_ar.c
-novatel.o  : $(SRC)/rcv/novatel.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/novatel.c
-ublox.o    : $(SRC)/rcv/ublox.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/ublox.c
-ss2.o      : $(SRC)/rcv/ss2.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/ss2.c
-crescent.o : $(SRC)/rcv/crescent.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/crescent.c
-skytraq.o  : $(SRC)/rcv/skytraq.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/skytraq.c
-gw10.o     : $(SRC)/rcv/gw10.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/gw10.c
-javad.o    : $(SRC)/rcv/javad.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/javad.c
-nvs.o      : $(SRC)/rcv/nvs.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/nvs.c
-binex.o    : $(SRC)/rcv/binex.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/binex.c
-rt17.o     : $(SRC)/rcv/rt17.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/rt17.c
-ephemeris.o: $(SRC)/ephemeris.c
-	$(CC) -c $(CFLAGS) $(SRC)/ephemeris.c
-rinex.o    : $(SRC)/rinex.c
-	$(CC) -c $(CFLAGS) $(SRC)/rinex.c
-ionex.o    : $(SRC)/ionex.c
-	$(CC) -c $(CFLAGS) $(SRC)/ionex.c
-qzslex.o   : $(SRC)/qzslex.c
-	$(CC) -c $(CFLAGS) $(SRC)/qzslex.c
+rtkrcv.o   : ../rtkrcv.cpp
+	$(CXX) -c $(CXXFLAGS) ../rtkrcv.cpp
+vt.o       : ../vt.cpp
+	$(CXX) -c $(CXXFLAGS) ../vt.cpp
+rtkcmn.o   : $(SRC)/rtkcmn.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtkcmn.cpp
+rtksvr.o   : $(SRC)/rtksvr.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtksvr.cpp
+rtkpos.o   : $(SRC)/rtkpos.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtkpos.cpp
+geoid.o    : $(SRC)/geoid.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/geoid.cpp
+solution.o : $(SRC)/solution.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/solution.cpp
+lambda.o   : $(SRC)/lambda.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/lambda.cpp
+sbas.o     : $(SRC)/sbas.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/sbas.cpp
+stream.o   : $(SRC)/stream.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/stream.cpp
+rcvraw.o : $(SRC)/rcvraw.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcvraw.cpp
+rtcm.o     : $(SRC)/rtcm.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm.cpp
+rtcm2.o    : $(SRC)/rtcm2.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm2.cpp
+rtcm3.o    : $(SRC)/rtcm3.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm3.cpp
+rtcm3e.o   : $(SRC)/rtcm3e.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm3e.cpp
+preceph.o  : $(SRC)/preceph.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/preceph.cpp
+options.o  : $(SRC)/options.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/options.cpp
+pntpos.o   : $(SRC)/pntpos.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/pntpos.cpp
+ppp.o      : $(SRC)/ppp.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/ppp.cpp
+ppp_ar.o   : $(SRC)/ppp_ar.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/ppp_ar.cpp
+novatel.o  : $(SRC)/rcv/novatel.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/novatel.cpp
+ublox.o    : $(SRC)/rcv/ublox.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/ublox.cpp
+ss2.o      : $(SRC)/rcv/ss2.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/ss2.cpp
+crescent.o : $(SRC)/rcv/crescent.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/crescent.cpp
+skytraq.o  : $(SRC)/rcv/skytraq.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/skytraq.cpp
+gw10.o     : $(SRC)/rcv/gw10.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/gw10.cpp
+javad.o    : $(SRC)/rcv/javad.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/javad.cpp
+nvs.o      : $(SRC)/rcv/nvs.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/nvs.cpp
+binex.o    : $(SRC)/rcv/binex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/binex.cpp
+rt17.o     : $(SRC)/rcv/rt17.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/rt17.cpp
+ephemeris.o: $(SRC)/ephemeris.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/ephemeris.cpp
+rinex.o    : $(SRC)/rinex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rinex.cpp
+ionex.o    : $(SRC)/ionex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/ionex.cpp
+qzslex.o   : $(SRC)/qzslex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/qzslex.cpp
 
 rtkrcv.o   : $(SRC)/rtklib.h ../vt.h
 rtkcmn.o   : $(SRC)/rtklib.h

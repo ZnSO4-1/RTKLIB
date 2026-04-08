@@ -4,11 +4,13 @@
 *          Copyright (C) 2015 by T.TAKASU, All rights reserved.
 *
 * version : $Revision:$ $Date:$
-* history : 2015/01/11 1.0  separated from rtkrcv.c
+* history : 2015/01/11 1.0  separated from rtkrcv.cpp
 *-----------------------------------------------------------------------------*/
 #ifndef VT_H
 #define VT_H
+#ifndef WIN32
 #include <termios.h>
+#endif
 #include "rtklib.h"
 
 #define MAXBUFF     4096                /* size of line buffer */
@@ -23,7 +25,9 @@ typedef struct vt_tag {                 /* virtual console type */
     int cur;                            /* cursor position */
     int cur_h;                          /* current history */
     int brk;                            /* break status */
+#ifndef WIN32
     struct termios tio;                 /* original terminal attribute */
+#endif
     char buff[MAXBUFF];                 /* line buffer */
     char esc[8];                        /* escape buffer */
     char *hist[MAXHIST];                /* history buffer */

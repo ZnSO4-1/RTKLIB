@@ -1,10 +1,11 @@
 # makefile for rtklib unit test
+CXX ?= g++
 
+CC := $(CXX)
 SRC    = ../../src
-#CFLAGS = -Wall -O3 -ansi -pedantic -I$(SRC) -DENAGLO
-CFLAGS = -Wall -O3 -ansi -pedantic -I$(SRC) -DTRACE -DENAGLO -DENAQZS
+#CXXFLAGS = -Wall -O3 -std=c++11 -pedantic -I$(SRC) -DENAGLO
+CXXFLAGS = -Wall -O3 -std=c++11 -pedantic -I$(SRC) -DTRACE -DENAGLO -DENAQZS
 LDLIBS = -lm -llapack -lblas
-CC = gcc
 
 BIN    = t_matrix t_time t_coord t_rinex t_lambda t_atmos t_misc t_preceph t_gloeph \
 t_geoid t_ppp t_ionex t_stec t_tle
@@ -26,36 +27,36 @@ t_ionex    : t_ionex.o rtkcmn.o preceph.o ionex.o
 t_stec     : t_stec.o rtkcmn.o preceph.o stec.o
 t_tle      : t_tle.o rtkcmn.o rinex.o ephemeris.o sbas.o preceph.o tle.o qzslex.o
 
-rtkcmn.o   : $(SRC)/rtklib.h $(SRC)/rtkcmn.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtkcmn.c
-rinex.o    : $(SRC)/rtklib.h $(SRC)/rinex.c
-	$(CC) -c $(CFLAGS) $(SRC)/rinex.c
-rtkpos.o   : $(SRC)/rtklib.h $(SRC)/rtkpos.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtkpos.c
-lambda.o   : $(SRC)/rtklib.h $(SRC)/lambda.c
-	$(CC) -c $(CFLAGS) $(SRC)/lambda.c
-geoid.o    : $(SRC)/rtklib.h $(SRC)/geoid.c
-	$(CC) -c $(CFLAGS) $(SRC)/geoid.c
-ephemeris.o: $(SRC)/rtklib.h $(SRC)/ephemeris.c
-	$(CC) -c $(CFLAGS) $(SRC)/ephemeris.c
-sbas.o     : $(SRC)/rtklib.h $(SRC)/sbas.c
-	$(CC) -c $(CFLAGS) $(SRC)/sbas.c
-preceph.o  : $(SRC)/rtklib.h $(SRC)/preceph.c
-	$(CC) -c $(CFLAGS) $(SRC)/preceph.c
-ppp.o      : $(SRC)/rtklib.h $(SRC)/ppp.c
-	$(CC) -c $(CFLAGS) $(SRC)/ppp.c
-ppp_ar.o   : $(SRC)/rtklib.h $(SRC)/ppp_ar.c
-	$(CC) -c $(CFLAGS) $(SRC)/ppp_ar.c
-pntpos.o   : $(SRC)/rtklib.h $(SRC)/pntpos.c
-	$(CC) -c $(CFLAGS) $(SRC)/pntpos.c
-ionex.o    : $(SRC)/rtklib.h $(SRC)/ionex.c
-	$(CC) -c $(CFLAGS) $(SRC)/ionex.c
-stec.o     : $(SRC)/rtklib.h $(SRC)/stec.c
-	$(CC) -c $(CFLAGS) $(SRC)/stec.c
-tle.o      : $(SRC)/rtklib.h $(SRC)/tle.c
-	$(CC) -c $(CFLAGS) $(SRC)/tle.c
-qzslex.o   : $(SRC)/rtklib.h $(SRC)/qzslex.c
-	$(CC) -c $(CFLAGS) $(SRC)/qzslex.c
+rtkcmn.o   : $(SRC)/rtklib.h $(SRC)/rtkcmn.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtkcmn.cpp
+rinex.o    : $(SRC)/rtklib.h $(SRC)/rinex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rinex.cpp
+rtkpos.o   : $(SRC)/rtklib.h $(SRC)/rtkpos.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtkpos.cpp
+lambda.o   : $(SRC)/rtklib.h $(SRC)/lambda.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/lambda.cpp
+geoid.o    : $(SRC)/rtklib.h $(SRC)/geoid.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/geoid.cpp
+ephemeris.o: $(SRC)/rtklib.h $(SRC)/ephemeris.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/ephemeris.cpp
+sbas.o     : $(SRC)/rtklib.h $(SRC)/sbas.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/sbas.cpp
+preceph.o  : $(SRC)/rtklib.h $(SRC)/preceph.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/preceph.cpp
+ppp.o      : $(SRC)/rtklib.h $(SRC)/ppp.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/ppp.cpp
+ppp_ar.o   : $(SRC)/rtklib.h $(SRC)/ppp_ar.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/ppp_ar.cpp
+pntpos.o   : $(SRC)/rtklib.h $(SRC)/pntpos.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/pntpos.cpp
+ionex.o    : $(SRC)/rtklib.h $(SRC)/ionex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/ionex.cpp
+stec.o     : $(SRC)/rtklib.h $(SRC)/stec.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/stec.cpp
+tle.o      : $(SRC)/rtklib.h $(SRC)/tle.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/tle.cpp
+qzslex.o   : $(SRC)/rtklib.h $(SRC)/qzslex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/qzslex.cpp
 
 utest : utest1 utest2 utest3 utest4 utest5 utest6 utest7 utest8
 utest : utest9 utest10 utest11 utest12 utest14
@@ -91,4 +92,3 @@ utest14 :
 
 clean :
 	rm -f *.o *.out *.exe $(BIN) *.stackdump gmon.out
-

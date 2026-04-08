@@ -1,4 +1,4 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{9F6E0B5B-4F43-43EF-8327-2D88D41470DB}</ProjectGuid>
         <ProjectType>CppConsoleApplication</ProjectType>
@@ -182,97 +182,97 @@
         <BCC_Defines>NDEBUG;$(BCC_Defines);$(BCC_Defines)</BCC_Defines>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="..\convbin.c">
+        <CppCompile Include="..\convbin.cpp">
             <BuildOrder>8</BuildOrder>
             <BuildOrder>3</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\convkml.c">
+        <CppCompile Include="..\..\..\src\convkml.cpp">
             <BuildOrder>-1</BuildOrder>
             <BuildOrder>1</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\convrnx.c">
+        <CppCompile Include="..\..\..\src\convrnx.cpp">
             <BuildOrder>11</BuildOrder>
             <BuildOrder>0</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\ephemeris.c">
+        <CppCompile Include="..\..\..\src\ephemeris.cpp">
             <BuildOrder>24</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\ionex.c">
+        <CppCompile Include="..\..\..\src\ionex.cpp">
             <BuildOrder>23</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\pntpos.c">
+        <CppCompile Include="..\..\..\src\pntpos.cpp">
             <BuildOrder>22</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\preceph.c">
+        <CppCompile Include="..\..\..\src\preceph.cpp">
             <BuildOrder>7</BuildOrder>
             <BuildOrder>14</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\qzslex.c">
+        <CppCompile Include="..\..\..\src\qzslex.cpp">
             <BuildOrder>21</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rcvraw.c">
+        <CppCompile Include="..\..\..\src\rcvraw.cpp">
             <BuildOrder>3</BuildOrder>
             <BuildOrder>10</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rcv\binex.c">
+        <CppCompile Include="..\..\..\src\rcv\binex.cpp">
             <BuildOrder>20</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rcv\crescent.c">
+        <CppCompile Include="..\..\..\src\rcv\crescent.cpp">
             <BuildOrder>9</BuildOrder>
             <BuildOrder>4</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rcv\gw10.c">
+        <CppCompile Include="..\..\..\src\rcv\gw10.cpp">
             <BuildOrder>4</BuildOrder>
             <BuildOrder>15</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rcv\javad.c">
+        <CppCompile Include="..\..\..\src\rcv\javad.cpp">
             <BuildOrder>5</BuildOrder>
             <BuildOrder>16</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rcv\novatel.c">
+        <CppCompile Include="..\..\..\src\rcv\novatel.cpp">
             <BuildOrder>5</BuildOrder>
             <BuildOrder>14</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rcv\nvs.c">
+        <CppCompile Include="..\..\..\src\rcv\nvs.cpp">
             <BuildOrder>18</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rcv\rt17.c">
+        <CppCompile Include="..\..\..\src\rcv\rt17.cpp">
             <BuildOrder>25</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rcv\skytraq.c">
+        <CppCompile Include="..\..\..\src\rcv\skytraq.cpp">
             <BuildOrder>6</BuildOrder>
             <BuildOrder>13</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rcv\ss2.c">
+        <CppCompile Include="..\..\..\src\rcv\ss2.cpp">
             <BuildOrder>6</BuildOrder>
             <BuildOrder>15</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rcv\ublox.c">
+        <CppCompile Include="..\..\..\src\rcv\ublox.cpp">
             <BuildOrder>7</BuildOrder>
             <BuildOrder>12</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rinex.c">
+        <CppCompile Include="..\..\..\src\rinex.cpp">
             <BuildOrder>8</BuildOrder>
             <BuildOrder>13</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rtcm.c">
+        <CppCompile Include="..\..\..\src\rtcm.cpp">
             <BuildOrder>12</BuildOrder>
             <BuildOrder>1</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rtcm2.c">
+        <CppCompile Include="..\..\..\src\rtcm2.cpp">
             <BuildOrder>17</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rtcm3.c">
+        <CppCompile Include="..\..\..\src\rtcm3.cpp">
             <BuildOrder>16</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rtcm3e.c">
+        <CppCompile Include="..\..\..\src\rtcm3e.cpp">
             <BuildOrder>19</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rtkcmn.c">
+        <CppCompile Include="..\..\..\src\rtkcmn.cpp">
             <BuildOrder>2</BuildOrder>
             <BuildOrder>11</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\sbas.c">
+        <CppCompile Include="..\..\..\src\sbas.cpp">
             <BuildOrder>9</BuildOrder>
             <BuildOrder>2</BuildOrder>
         </CppCompile>

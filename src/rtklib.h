@@ -1,7 +1,19 @@
 /*------------------------------------------------------------------------------
 * rtklib.h : rtklib constants, types and function prototypes
+*            RTKLIB core public constants, types, and function prototypes
+*            RTKLIB 核心公共常量、类型和函数原型
 *
 *          Copyright (C) 2007-2015 by T.TAKASU, All rights reserved.
+*          Original upstream copyright is retained.
+*          保留上游原始版权声明。
+*
+* migration notes :
+*            This downstream workspace is being migrated from C to C++ while
+*            keeping the public API compatible during the first pass.
+*
+* 迁移说明 :
+*            本下游工作区正在从 C 迁移到 C++。第一阶段优先保持公共 API
+*            兼容，再逐步引入更现代的 C++ 封装。
 *
 * options : -DENAGLO   enable GLONASS
 *           -DENAGAL   enable Galileo

@@ -5,7 +5,7 @@
 
 cd ../..
 
-for file in src/*.h src/*.c src/rcv/*.c
+for file in src/*.h src/*.cpp src/rcv/*.cpp
 do
     cat $file |
     grep -v "^$" | grep -v "^[ \t]*/\*" | grep -v "^[ \t]*\*" | grep -v "^[ \t]*//" |

@@ -1,4 +1,4 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{1D91F63F-0154-4396-A76F-6467DD904836}</ProjectGuid>
         <ProjectType>CppConsoleApplication</ProjectType>
@@ -183,82 +183,82 @@
         <BCC_Defines>NDEBUG;$(BCC_Defines);$(BCC_Defines)</BCC_Defines>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="..\rnx2rtkp.c">
+        <CppCompile Include="..\rnx2rtkp.cpp">
             <BuildOrder>6</BuildOrder>
             <BuildOrder>15</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\ephemeris.c">
+        <CppCompile Include="..\..\..\src\ephemeris.cpp">
             <BuildOrder>6</BuildOrder>
             <BuildOrder>13</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\geoid.c">
+        <CppCompile Include="..\..\..\src\geoid.cpp">
             <BuildOrder>9</BuildOrder>
             <BuildOrder>4</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\ionex.c">
+        <CppCompile Include="..\..\..\src\ionex.cpp">
             <BuildOrder>5</BuildOrder>
             <BuildOrder>16</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\lambda.c">
+        <CppCompile Include="..\..\..\src\lambda.cpp">
             <BuildOrder>3</BuildOrder>
             <BuildOrder>10</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\options.c">
+        <CppCompile Include="..\..\..\src\options.cpp">
             <BuildOrder>11</BuildOrder>
             <BuildOrder>0</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\pntpos.c">
+        <CppCompile Include="..\..\..\src\pntpos.cpp">
             <BuildOrder>12</BuildOrder>
             <BuildOrder>1</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\postpos.c">
+        <CppCompile Include="..\..\..\src\postpos.cpp">
             <BuildOrder>8</BuildOrder>
             <BuildOrder>13</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\ppp.c">
+        <CppCompile Include="..\..\..\src\ppp.cpp">
             <BuildOrder>7</BuildOrder>
             <BuildOrder>14</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\ppp_ar.c">
+        <CppCompile Include="..\..\..\src\ppp_ar.cpp">
             <BuildOrder>18</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\preceph.c">
+        <CppCompile Include="..\..\..\src\preceph.cpp">
             <BuildOrder>9</BuildOrder>
             <BuildOrder>2</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\qzslex.c">
+        <CppCompile Include="..\..\..\src\qzslex.cpp">
             <BuildOrder>22</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rinex.c">
+        <CppCompile Include="..\..\..\src\rinex.cpp">
             <BuildOrder>5</BuildOrder>
             <BuildOrder>14</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rtcm.c">
+        <CppCompile Include="..\..\..\src\rtcm.cpp">
             <BuildOrder>4</BuildOrder>
             <BuildOrder>15</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rtcm2.c">
+        <CppCompile Include="..\..\..\src\rtcm2.cpp">
             <BuildOrder>17</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rtcm3.c">
+        <CppCompile Include="..\..\..\src\rtcm3.cpp">
             <BuildOrder>16</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rtcm3e.c">
+        <CppCompile Include="..\..\..\src\rtcm3e.cpp">
             <BuildOrder>21</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rtkcmn.c">
+        <CppCompile Include="..\..\..\src\rtkcmn.cpp">
             <BuildOrder>-1</BuildOrder>
             <BuildOrder>1</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rtkpos.c">
+        <CppCompile Include="..\..\..\src\rtkpos.cpp">
             <BuildOrder>7</BuildOrder>
             <BuildOrder>12</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\sbas.c">
+        <CppCompile Include="..\..\..\src\sbas.cpp">
             <BuildOrder>2</BuildOrder>
             <BuildOrder>11</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\solution.c">
+        <CppCompile Include="..\..\..\src\solution.cpp">
             <BuildOrder>8</BuildOrder>
             <BuildOrder>3</BuildOrder>
         </CppCompile>

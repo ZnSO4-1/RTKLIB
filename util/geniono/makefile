@@ -1,8 +1,10 @@
 # makefile for ppp_local
+CXX ?= g++
 
+CC := $(CXX)
 RTKLIBDIR=../../src
 
-CFLAGS = -Wall -O3 -I$(RTKLIBDIR) -DTRACE
+CXXFLAGS = -Wall -O3 -I$(RTKLIBDIR) -DTRACE
 LDFLAGS = -lm
 
 BIN = genstec
@@ -11,18 +13,18 @@ all        : $(BIN)
 genstec    : genstec.o rtkcmn.o ephemeris.o preceph.o sbas.o rinex.o
 #gengrid    : gengrid.o rtkcmn.o stec.o preceph.o
 
-rtkcmn.o   : $(RTKLIBDIR)/rtklib.h $(RTKLIBDIR)/rtkcmn.c
-	$(CC) -c $(CFLAGS) $(RTKLIBDIR)/rtkcmn.c
-ephemeris.o: $(RTKLIBDIR)/ephemeris.c
-	$(CC) -c $(CFLAGS) $(RTKLIBDIR)/ephemeris.c
-preceph.o  : $(RTKLIBDIR)/preceph.c
-	$(CC) -c $(CFLAGS) $(RTKLIBDIR)/preceph.c
-sbas.o     : $(RTKLIBDIR)/sbas.c
-	$(CC) -c $(CFLAGS) $(RTKLIBDIR)/sbas.c
-rinex.o    : $(RTKLIBDIR)/rinex.c
-	$(CC) -c $(CFLAGS) $(RTKLIBDIR)/rinex.c
-stec.o     : $(RTKLIBDIR)/stec.c
-	$(CC) -c $(CFLAGS) $(RTKLIBDIR)/stec.c
+rtkcmn.o   : $(RTKLIBDIR)/rtklib.h $(RTKLIBDIR)/rtkcmn.cpp
+	$(CXX) -c $(CXXFLAGS) $(RTKLIBDIR)/rtkcmn.cpp
+ephemeris.o: $(RTKLIBDIR)/ephemeris.cpp
+	$(CXX) -c $(CXXFLAGS) $(RTKLIBDIR)/ephemeris.cpp
+preceph.o  : $(RTKLIBDIR)/preceph.cpp
+	$(CXX) -c $(CXXFLAGS) $(RTKLIBDIR)/preceph.cpp
+sbas.o     : $(RTKLIBDIR)/sbas.cpp
+	$(CXX) -c $(CXXFLAGS) $(RTKLIBDIR)/sbas.cpp
+rinex.o    : $(RTKLIBDIR)/rinex.cpp
+	$(CXX) -c $(CXXFLAGS) $(RTKLIBDIR)/rinex.cpp
+stec.o     : $(RTKLIBDIR)/stec.cpp
+	$(CXX) -c $(CXXFLAGS) $(RTKLIBDIR)/stec.cpp
 
 OBSDIR=/proj/data_gsi/2011
 NAVDIR=/proj/data/2011

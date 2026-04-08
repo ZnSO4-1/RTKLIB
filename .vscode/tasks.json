@@ -1,0 +1,69 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CMake: Configure MSVC Debug",
+      "type": "shell",
+      "command": "C:\\Microsoft Visual Studio\\2022\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+      "args": [
+        "--preset",
+        "msvc-debug"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Build MSVC Debug",
+      "type": "shell",
+      "command": "C:\\Microsoft Visual Studio\\2022\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+      "args": [
+        "--build",
+        "--preset",
+        "msvc-debug"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": "$msCompile",
+      "dependsOn": [
+        "CMake: Configure MSVC Debug"
+      ]
+    },
+    {
+      "label": "CMake: Configure MSVC Release",
+      "type": "shell",
+      "command": "C:\\Microsoft Visual Studio\\2022\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+      "args": [
+        "--preset",
+        "msvc-release"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: Build MSVC Release",
+      "type": "shell",
+      "command": "C:\\Microsoft Visual Studio\\2022\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe",
+      "args": [
+        "--build",
+        "--preset",
+        "msvc-release"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": "$msCompile",
+      "dependsOn": [
+        "CMake: Configure MSVC Release"
+      ]
+    }
+  ]
+}

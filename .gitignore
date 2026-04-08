@@ -1,8 +1,11 @@
-*.o
-*.obs
-*.ini
-*.local
-Release
-Release_Build
-Debug_Build
-__history
+# Local build products / 本地构建产物
+build/
+
+# Visual Studio temporary files / Visual Studio 临时文件
+*.obj
+*.pdb
+*.ilk
+*.exe
+
+# Unit-test scratch outputs / 单元测试临时输出
+test/utest/*.out

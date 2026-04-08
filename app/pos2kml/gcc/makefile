@@ -1,24 +1,26 @@
 # makefile for pos2kml
+CXX ?= g++
 
+CC := $(CXX)
 BINDIR = /usr/local/bin
 SRC    = ../../../src
-CFLAGS = -Wall -O3 -ansi -pedantic -I$(SRC) -DTRACE
+CXXFLAGS = -Wall -O3 -std=c++11 -pedantic -I$(SRC) -DTRACE
 LDLIBS  = -lm -lrt
 
 pos2kml    : pos2kml.o convkml.o solution.o geoid.o rtkcmn.o preceph.o
 
-pos2kml.o  : ../pos2kml.c
-	$(CC) -c $(CFLAGS) ../pos2kml.c
-convkml.o  : $(SRC)/convkml.c
-	$(CC) -c $(CFLAGS) $(SRC)/convkml.c
-solution.o : $(SRC)/solution.c
-	$(CC) -c $(CFLAGS) $(SRC)/solution.c
-geoid.o    : $(SRC)/geoid.c
-	$(CC) -c $(CFLAGS) $(SRC)/geoid.c
-rtkcmn.o   : $(SRC)/rtkcmn.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtkcmn.c
-preceph.o  : $(SRC)/preceph.c
-	$(CC) -c $(CFLAGS) $(SRC)/preceph.c
+pos2kml.o  : ../pos2kml.cpp
+	$(CXX) -c $(CXXFLAGS) ../pos2kml.cpp
+convkml.o  : $(SRC)/convkml.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/convkml.cpp
+solution.o : $(SRC)/solution.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/solution.cpp
+geoid.o    : $(SRC)/geoid.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/geoid.cpp
+rtkcmn.o   : $(SRC)/rtkcmn.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtkcmn.cpp
+preceph.o  : $(SRC)/preceph.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/preceph.cpp
 
 pos2kml.o  : $(SRC)/rtklib.h
 convkml.o  : $(SRC)/rtklib.h

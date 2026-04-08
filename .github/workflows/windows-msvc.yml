@@ -1,0 +1,40 @@
+name: Windows MSVC
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    name: ${{ matrix.name }}
+    runs-on: windows-2022
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Debug
+            preset: msvc-debug
+            config: Debug
+            build_dir: build/cmake/msvc-debug
+          - name: Release
+            preset: msvc-release
+            config: Release
+            build_dir: build/cmake/msvc-release
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show CMake version
+        run: cmake --version
+
+      - name: Configure
+        run: cmake --preset ${{ matrix.preset }}
+
+      - name: Build
+        run: cmake --build --preset ${{ matrix.preset }} --parallel
+
+      - name: Test
+        run: ctest --test-dir ${{ matrix.build_dir }} -C ${{ matrix.config }} --output-on-failure --interactive-debug-mode 0

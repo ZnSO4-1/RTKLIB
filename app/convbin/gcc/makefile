@@ -1,4 +1,6 @@
 #
+CXX ?= g++
+CC := $(CXX)
 # makefile for convbin
 #
 
@@ -9,7 +11,7 @@ SRC    = ../../../src
 INCLUDE= -I$(SRC)
 OPTIONS= -DTRACE -DENAGLO -DENAQZS -DENAGAL -DENACMP -DNFREQ=6 -DNEXOBS=3
 
-CFLAGS = -O3 -ansi -pedantic -Wall -Wno-unused-but-set-variable $(INCLUDE) $(OPTIONS) -g
+CXXFLAGS = -O3 -std=c++11 -pedantic -Wall -Wno-unused-but-set-variable $(INCLUDE) $(OPTIONS) -g
 
 LDLIBS = -lm -lrt
 
@@ -20,56 +22,56 @@ convbin    : rtcm.o rtcm2.o rtcm3.o rtcm3e.o pntpos.o ephemeris.o ionex.o
 convbin    : novatel.o ss2.o ublox.o crescent.o skytraq.o gw10.o javad.o nvs.o
 convbin    : binex.o rt17.o qzslex.o
 
-convbin.o  : ../convbin.c
-	$(CC) -c $(CFLAGS) ../convbin.c
-rtkcmn.o   : $(SRC)/rtkcmn.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtkcmn.c
-rinex.o    : $(SRC)/rinex.c
-	$(CC) -c $(CFLAGS) $(SRC)/rinex.c
-sbas.o     : $(SRC)/sbas.c
-	$(CC) -c $(CFLAGS) $(SRC)/sbas.c
-preceph.o  : $(SRC)/preceph.c
-	$(CC) -c $(CFLAGS) $(SRC)/preceph.c
-rcvraw.o   : $(SRC)/rcvraw.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcvraw.c
-convrnx.o  : $(SRC)/convrnx.c
-	$(CC) -c $(CFLAGS) $(SRC)/convrnx.c
-rtcm.o     : $(SRC)/rtcm.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm.c
-rtcm2.o    : $(SRC)/rtcm2.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm2.c
-rtcm3.o    : $(SRC)/rtcm3.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm3.c
-rtcm3e.o   : $(SRC)/rtcm3e.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm3e.c
-pntpos.o   : $(SRC)/pntpos.c
-	$(CC) -c $(CFLAGS) $(SRC)/pntpos.c
-ionex.o    : $(SRC)/ionex.c
-	$(CC) -c $(CFLAGS) $(SRC)/ionex.c
-ephemeris.o: $(SRC)/ephemeris.c
-	$(CC) -c $(CFLAGS) $(SRC)/ephemeris.c
-novatel.o  : $(SRC)/rcv/novatel.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/novatel.c
-ss2.o      : $(SRC)/rcv/ss2.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/ss2.c
-ublox.o    : $(SRC)/rcv/ublox.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/ublox.c
-crescent.o : $(SRC)/rcv/crescent.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/crescent.c
-skytraq.o  : $(SRC)/rcv/skytraq.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/skytraq.c
-gw10.o     : $(SRC)/rcv/gw10.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/gw10.c
-javad.o    : $(SRC)/rcv/javad.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/javad.c
-nvs.o      : $(SRC)/rcv/nvs.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/nvs.c
-binex.o    : $(SRC)/rcv/binex.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/binex.c
-rt17.o     : $(SRC)/rcv/rt17.c
-	$(CC) -c $(CFLAGS) $(SRC)/rcv/rt17.c
-qzslex.o    : $(SRC)/qzslex.c
-	$(CC) -c $(CFLAGS) $(SRC)/qzslex.c
+convbin.o  : ../convbin.cpp
+	$(CXX) -c $(CXXFLAGS) ../convbin.cpp
+rtkcmn.o   : $(SRC)/rtkcmn.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtkcmn.cpp
+rinex.o    : $(SRC)/rinex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rinex.cpp
+sbas.o     : $(SRC)/sbas.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/sbas.cpp
+preceph.o  : $(SRC)/preceph.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/preceph.cpp
+rcvraw.o   : $(SRC)/rcvraw.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcvraw.cpp
+convrnx.o  : $(SRC)/convrnx.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/convrnx.cpp
+rtcm.o     : $(SRC)/rtcm.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm.cpp
+rtcm2.o    : $(SRC)/rtcm2.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm2.cpp
+rtcm3.o    : $(SRC)/rtcm3.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm3.cpp
+rtcm3e.o   : $(SRC)/rtcm3e.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm3e.cpp
+pntpos.o   : $(SRC)/pntpos.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/pntpos.cpp
+ionex.o    : $(SRC)/ionex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/ionex.cpp
+ephemeris.o: $(SRC)/ephemeris.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/ephemeris.cpp
+novatel.o  : $(SRC)/rcv/novatel.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/novatel.cpp
+ss2.o      : $(SRC)/rcv/ss2.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/ss2.cpp
+ublox.o    : $(SRC)/rcv/ublox.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/ublox.cpp
+crescent.o : $(SRC)/rcv/crescent.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/crescent.cpp
+skytraq.o  : $(SRC)/rcv/skytraq.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/skytraq.cpp
+gw10.o     : $(SRC)/rcv/gw10.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/gw10.cpp
+javad.o    : $(SRC)/rcv/javad.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/javad.cpp
+nvs.o      : $(SRC)/rcv/nvs.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/nvs.cpp
+binex.o    : $(SRC)/rcv/binex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/binex.cpp
+rt17.o     : $(SRC)/rcv/rt17.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rcv/rt17.cpp
+qzslex.o    : $(SRC)/qzslex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/qzslex.cpp
 
 convbin.o  : $(SRC)/rtklib.h
 rtkcmn.o   : $(SRC)/rtklib.h

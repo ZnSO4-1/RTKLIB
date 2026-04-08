@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{1FF61766-2A30-41D9-98A5-665B43D37134}</ProjectGuid>
 			<ProjectVersion>13.4</ProjectVersion>
@@ -83,49 +83,49 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\src_c\cal2jd.c">
+			<CppCompile Include="..\src_c\cal2jd.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\src_c\dat.c">
+			<CppCompile Include="..\src_c\dat.cpp">
 				<BuildOrder>1</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\src_c\dehanttideinel.c">
+			<CppCompile Include="..\src_c\dehanttideinel.cpp">
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\src_c\gmf.c">
+			<CppCompile Include="..\src_c\gmf.cpp">
 				<BuildOrder>3</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\src_c\gpt.c">
+			<CppCompile Include="..\src_c\gpt.cpp">
 				<BuildOrder>4</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\src_c\norm8.c">
+			<CppCompile Include="..\src_c\norm8.cpp">
 				<BuildOrder>5</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\src_c\sprod.c">
+			<CppCompile Include="..\src_c\sprod.cpp">
 				<BuildOrder>6</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\src_c\st1idiu.c">
+			<CppCompile Include="..\src_c\st1idiu.cpp">
 				<BuildOrder>7</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\src_c\st1isem.c">
+			<CppCompile Include="..\src_c\st1isem.cpp">
 				<BuildOrder>8</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\src_c\st1l1.c">
+			<CppCompile Include="..\src_c\st1l1.cpp">
 				<BuildOrder>9</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\src_c\step2diu.c">
+			<CppCompile Include="..\src_c\step2diu.cpp">
 				<BuildOrder>10</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\src_c\step2lon.c">
+			<CppCompile Include="..\src_c\step2lon.cpp">
 				<BuildOrder>11</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\src_c\vmf1.c">
+			<CppCompile Include="..\src_c\vmf1.cpp">
 				<BuildOrder>12</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\src_c\vmf1_ht.c">
+			<CppCompile Include="..\src_c\vmf1_ht.cpp">
 				<BuildOrder>13</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\src_c\zero_vec8.c">
+			<CppCompile Include="..\src_c\zero_vec8.cpp">
 				<BuildOrder>14</BuildOrder>
 			</CppCompile>
 			<BuildConfiguration Include="Release">

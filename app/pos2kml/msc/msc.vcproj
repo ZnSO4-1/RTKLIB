@@ -177,27 +177,27 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\..\src\convkml.c"
+				RelativePath="..\..\..\src\convkml.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\geoid.c"
+				RelativePath="..\..\..\src\geoid.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\pos2kml.c"
+				RelativePath="..\pos2kml.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\preceph.c"
+				RelativePath="..\..\..\src\preceph.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\rtkcmn.c"
+				RelativePath="..\..\..\src\rtkcmn.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\solution.c"
+				RelativePath="..\..\..\src\solution.cpp"
 				>
 			</File>
 		</Filter>

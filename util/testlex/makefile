@@ -1,8 +1,10 @@
 # makefile for testlex
+CXX ?= g++
 
+CC := $(CXX)
 SRC    = ../../src
-#CFLAGS = -Wall -O3 -ansi -pedantic -I$(SRC) -DTRACE -DENAQZS -DENAGLO -DENALEX
-CFLAGS = -Wall -O3 -ansi -pedantic -I$(SRC) -DTRACE -DENAQZS -DENAGLO
+#CXXFLAGS = -Wall -O3 -std=c++11 -pedantic -I$(SRC) -DTRACE -DENAQZS -DENAGLO -DENALEX
+CXXFLAGS = -Wall -O3 -std=c++11 -pedantic -I$(SRC) -DTRACE -DENAQZS -DENAGLO
 LDFLAGS= -lm -lrt
 
 all        : convlex dumplex dumpssr outlexion
@@ -12,18 +14,18 @@ dumplex    : rtkcmn.o preceph.o qzslex.o
 dumpssr    : rtkcmn.o preceph.o rtcm.o rtcm3.o rtcm2.o dumpssr.o
 outlexion  : rtkcmn.o preceph.o qzslex.o
 
-rtkcmn.o   : $(SRC)/rtklib.h $(SRC)/rtkcmn.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtkcmn.c
-preceph.o  : $(SRC)/rtklib.h $(SRC)/preceph.c
-	$(CC) -c $(CFLAGS) $(SRC)/preceph.c
-qzslex.o   : $(SRC)/rtklib.h $(SRC)/qzslex.c
-	$(CC) -c $(CFLAGS) $(SRC)/qzslex.c
-rtcm.o     : $(SRC)/rtklib.h $(SRC)/rtcm.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm.c
-rtcm3.o    : $(SRC)/rtklib.h $(SRC)/rtcm3.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm3.c
-rtcm2.o    : $(SRC)/rtklib.h $(SRC)/rtcm2.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtcm2.c
+rtkcmn.o   : $(SRC)/rtklib.h $(SRC)/rtkcmn.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtkcmn.cpp
+preceph.o  : $(SRC)/rtklib.h $(SRC)/preceph.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/preceph.cpp
+qzslex.o   : $(SRC)/rtklib.h $(SRC)/qzslex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/qzslex.cpp
+rtcm.o     : $(SRC)/rtklib.h $(SRC)/rtcm.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm.cpp
+rtcm3.o    : $(SRC)/rtklib.h $(SRC)/rtcm3.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm3.cpp
+rtcm2.o    : $(SRC)/rtklib.h $(SRC)/rtcm2.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtcm2.cpp
 
 install:
 	cp -f convlex.exe /usr/local/bin

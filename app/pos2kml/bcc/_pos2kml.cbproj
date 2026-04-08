@@ -1,4 +1,4 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{6BE696E0-FCDD-4A5B-AF9C-AC4E8E2F103A}</ProjectGuid>
         <ProjectType>CppConsoleApplication</ProjectType>
@@ -183,26 +183,26 @@
         <BCC_Defines>NDEBUG;$(BCC_Defines);$(BCC_Defines)</BCC_Defines>
     </PropertyGroup>
     <ItemGroup>
-        <CppCompile Include="..\pos2kml.c">
+        <CppCompile Include="..\pos2kml.cpp">
             <BuildOrder>5</BuildOrder>
             <BuildOrder>1</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\convkml.c">
+        <CppCompile Include="..\..\..\src\convkml.cpp">
             <BuildOrder>-1</BuildOrder>
             <BuildOrder>1</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\geoid.c">
+        <CppCompile Include="..\..\..\src\geoid.cpp">
             <BuildOrder>3</BuildOrder>
             <BuildOrder>2</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\preceph.c">
+        <CppCompile Include="..\..\..\src\preceph.cpp">
             <BuildOrder>5</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\rtkcmn.c">
+        <CppCompile Include="..\..\..\src\rtkcmn.cpp">
             <BuildOrder>4</BuildOrder>
             <BuildOrder>2</BuildOrder>
         </CppCompile>
-        <CppCompile Include="..\..\..\src\solution.c">
+        <CppCompile Include="..\..\..\src\solution.cpp">
             <BuildOrder>4</BuildOrder>
             <BuildOrder>0</BuildOrder>
         </CppCompile>

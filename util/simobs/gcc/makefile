@@ -1,18 +1,20 @@
 # makefile for simobs
+CXX ?= g++
 
+CC := $(CXX)
 BINDIR = /usr/local/bin
 SRC    = ../../../src
-CFLAGS = -Wall -O3 -ansi -pedantic -I$(SRC) -DTRACE -DENAGLO -DENAGAL -DENAQZS -DNFREQ=4 -DMAXOBS=128
+CXXFLAGS = -Wall -O3 -std=c++11 -pedantic -I$(SRC) -DTRACE -DENAGLO -DENAGAL -DENAQZS -DNFREQ=4 -DMAXOBS=128
 LDLIBS  = -lm
 
 simobs     : simobs.o rinex.o rtkcmn.o
 
-simobs.o   : ../simobs.c
-	$(CC) -c $(CFLAGS) ../simobs.c
-rinex.o    : $(SRC)/rinex.c
-	$(CC) -c $(CFLAGS) $(SRC)/rinex.c
-rtkcmn.o   : $(SRC)/rtkcmn.c
-	$(CC) -c $(CFLAGS) $(SRC)/rtkcmn.c
+simobs.o   : ../simobs.cpp
+	$(CXX) -c $(CXXFLAGS) ../simobs.cpp
+rinex.o    : $(SRC)/rinex.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rinex.cpp
+rtkcmn.o   : $(SRC)/rtkcmn.cpp
+	$(CXX) -c $(CXXFLAGS) $(SRC)/rtkcmn.cpp
 
 simobs.o   : $(SRC)/rtklib.h
 rtkcmn.o   : $(SRC)/rtklib.h

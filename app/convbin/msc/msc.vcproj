@@ -179,75 +179,75 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\convbin.c"
+				RelativePath="..\convbin.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\convrnx.c"
+				RelativePath="..\..\..\src\convrnx.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\rcv\crescent.c"
+				RelativePath="..\..\..\src\rcv\crescent.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\rcv\gw10.c"
+				RelativePath="..\..\..\src\rcv\gw10.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\rcv\javad.c"
+				RelativePath="..\..\..\src\rcv\javad.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\rcv\novatel.c"
+				RelativePath="..\..\..\src\rcv\novatel.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\rcv\nvs.c"
+				RelativePath="..\..\..\src\rcv\nvs.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\preceph.c"
+				RelativePath="..\..\..\src\preceph.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\rcvraw.c"
+				RelativePath="..\..\..\src\rcvraw.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\rinex.c"
+				RelativePath="..\..\..\src\rinex.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\rtcm.c"
+				RelativePath="..\..\..\src\rtcm.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\rtcm2.c"
+				RelativePath="..\..\..\src\rtcm2.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\rtcm3.c"
+				RelativePath="..\..\..\src\rtcm3.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\rtkcmn.c"
+				RelativePath="..\..\..\src\rtkcmn.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\sbas.c"
+				RelativePath="..\..\..\src\sbas.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\rcv\skytraq.c"
+				RelativePath="..\..\..\src\rcv\skytraq.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\rcv\ss2.c"
+				RelativePath="..\..\..\src\rcv\ss2.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\rcv\ublox.c"
+				RelativePath="..\..\..\src\rcv\ublox.cpp"
 				>
 			</File>
 		</Filter>

@@ -1,8 +1,10 @@
 # makefile for gencrc
+CXX ?= g++
 
+CC := $(CXX)
 BINDIR = /usr/local/bin
 SRC    = ../../../src
-CFLAGS = -Wall -O3 -ansi -pedantic
+CXXFLAGS = -Wall -O3 -std=c++11 -pedantic
 LDLIBS  = -lm
 
 all        : gencrc genxor genmsk
@@ -14,7 +16,7 @@ clean:
 	rm -f gencrc genxor genmsk *.o
 
 test:
-	./gencrc -16 > crc16.c
-	./gencrc -24 > crc24.c
-	./genxor > xor.c
-	./genmsk > msk.c
+	./gencrc -16 > crc16.cpp
+	./gencrc -24 > crc24.cpp
+	./genxor > xor.cpp
+	./genmsk > msk.cpp
