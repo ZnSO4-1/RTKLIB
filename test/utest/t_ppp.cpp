@@ -96,11 +96,38 @@ void utest4(void)
     rtkfree(&rtk);
     printf("%s utset4 : OK\n",__FILE__);
 }
+/* pppos() should clear stale status on unusable non-empty epoch */
+void utest5(void)
+{
+    prcopt_t opt=prcopt_default;
+    rtk_t rtk;
+    nav_t nav;
+    obsd_t obs;
+
+    memset(&rtk,0,sizeof(rtk));
+    memset(&nav,0,sizeof(nav));
+    memset(&obs,0,sizeof(obs));
+
+    opt.mode=PMODE_PPP_KINEMA;
+    rtkinit(&rtk,&opt);
+
+    rtk.sol.stat=SOLQ_SINGLE;
+    rtk.sol.ns=4;
+
+    pppos(&rtk,&obs,1,&nav);
+
+    assert(rtk.sol.stat==SOLQ_NONE);
+    assert(rtk.sol.ns==0);
+
+    rtkfree(&rtk);
+    printf("%s utset5 : OK\n",__FILE__);
+}
 int main(void)
 {
     utest1();
     utest2();
     utest3();
     utest4();
+    utest5();
     return 0;
 }
