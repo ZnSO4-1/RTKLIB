@@ -541,6 +541,8 @@ static int corr_ion(gtime_t time, const nav_t *nav, int sat, const double *pos,
 #ifdef EXTSTEC
     double rate;
 #endif
+    if (brk) *brk=0;
+
     /* sbas ionosphere model */
     if (ionoopt==IONOOPT_SBAS) {
         return sbsioncorr(time,nav,pos,azel,ion,var);
@@ -579,6 +581,7 @@ static int corrmeas(const obsd_t *obs, const nav_t *nav, const double *pos,
     trace(4,"corrmeas:\n");
     
     meas[0]=meas[1]=var[0]=var[1]=0.0;
+    if (brk) *brk=0;
     
     /* iono-free LC */
     if (opt->ionoopt==IONOOPT_IFLC) {
@@ -784,6 +787,7 @@ static void udbias_ppp(rtk_t *rtk, const obsd_t *obs, int n, const nav_t *nav)
     for (i=k=0;i<n&&i<MAXOBS;i++) {
         sat=obs[i].sat;
         j=IB(sat,&rtk->opt);
+        brk=0;
         if (!corrmeas(obs+i,nav,pos,rtk->ssat[sat-1].azel,&rtk->opt,NULL,NULL,
                       0.0,meas,var,&brk)) continue;
         
@@ -951,6 +955,7 @@ static int res_ppp(int iter, const obsd_t *obs, int n, const double *rs,
         if (opt->posopt[2]) {
             windupcorr(rtk->sol.time,rs+i*6,rr,&rtk->ssat[sat-1].phw);
         }
+        brk=0;
         /* ionosphere and antenna phase corrected measurements */
         if (!corrmeas(obs+i,nav,pos,azel+i*2,&rtk->opt,dantr,dants,
                       rtk->ssat[sat-1].phw,meas,varm,&brk)) {
