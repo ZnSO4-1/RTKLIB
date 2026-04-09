@@ -1023,6 +1023,14 @@ extern void pppos(rtk_t *rtk, const obsd_t *obs, int n, const nav_t *nav)
     rs=mat(6,n); dts=mat(2,n); var=mat(1,n); azel=zeros(2,n);
     
     for (i=0;i<MAXSAT;i++) rtk->ssat[i].fix[0]=0;
+
+    if (!obs||!nav||n<=0) {
+        trace(2,"pppos: no valid observation epoch\n");
+        rtk->sol.stat=SOLQ_NONE;
+        rtk->sol.ns=0;
+        free(rs); free(dts); free(var); free(azel);
+        return;
+    }
     
     /* temporal update of states */
     udstate_ppp(rtk,obs,n,nav);

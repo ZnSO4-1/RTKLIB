@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <assert.h>
+#include <string.h>
 #include "../../src/rtklib.h"
 
 /* eci2ecef() */
@@ -71,10 +72,35 @@ void utest3(void)
     }
     printf("%s utset3 : OK\n",__FILE__);
 }
+/* pppos() empty-epoch guard */
+void utest4(void)
+{
+    prcopt_t opt=prcopt_default;
+    rtk_t rtk;
+    nav_t nav;
+
+    memset(&rtk,0,sizeof(rtk));
+    memset(&nav,0,sizeof(nav));
+
+    opt.mode=PMODE_PPP_KINEMA;
+    rtkinit(&rtk,&opt);
+
+    rtk.sol.stat=SOLQ_SINGLE;
+    rtk.sol.ns=5;
+
+    pppos(&rtk,NULL,0,&nav);
+
+    assert(rtk.sol.stat==SOLQ_NONE);
+    assert(rtk.sol.ns==0);
+
+    rtkfree(&rtk);
+    printf("%s utset4 : OK\n",__FILE__);
+}
 int main(void)
 {
     utest1();
     utest2();
     utest3();
+    utest4();
     return 0;
 }
