@@ -35,6 +35,7 @@ Makefile text eol=lf
 # Windows project and batch files use CRLF.
 *.bat     text eol=crlf
 *.cmd     text eol=crlf
+*.ps1     text eol=crlf
 *.sln     text eol=crlf merge=union
 *.vcproj  text eol=crlf
 *.vcxproj text eol=crlf
