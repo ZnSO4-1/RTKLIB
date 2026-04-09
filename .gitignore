@@ -9,3 +9,6 @@ build/
 
 # Unit-test scratch outputs / 单元测试临时输出
 test/utest/*.out
+
+# Private local notes / 私有本地记录
+LOCAL_CHANGELOG.md

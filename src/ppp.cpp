@@ -631,6 +631,19 @@ static double gfmeas(const obsd_t *obs, const nav_t *nav)
     
     return lam[0]*obs->L[0]-lam[1]*obs->L[1];
 }
+/* reset per-epoch PPP satellite status --------------------------------------*/
+static void reset_ppp_epoch_status(rtk_t *rtk)
+{
+    int i;
+
+    for (i=0;i<MAXSAT;i++) {
+        rtk->ssat[i].vsat[0]=0;
+        rtk->ssat[i].fix [0]=0;
+        rtk->ssat[i].snr [0]=0;
+        rtk->ssat[i].resp[0]=0.0;
+        rtk->ssat[i].resc[0]=0.0;
+    }
+}
 /* temporal update of position -----------------------------------------------*/
 static void udpos_ppp(rtk_t *rtk)
 {
@@ -1020,19 +1033,23 @@ extern void pppos(rtk_t *rtk, const obsd_t *obs, int n, const nav_t *nav)
     
     trace(3,"pppos   : nx=%d n=%d\n",rtk->nx,n);
 
+    reset_ppp_epoch_status(rtk);
+
     if (!obs||!nav||n<=0) {
         trace(2,"pppos: no valid observation epoch\n");
         rtk->sol.stat=SOLQ_NONE;
         rtk->sol.ns=0;
+        rtk->sol.age=0.0f;
+        rtk->sol.ratio=0.0f;
         return;
     }
     rs=mat(6,n); dts=mat(2,n); var=mat(1,n); azel=zeros(2,n);
 
-    for (i=0;i<MAXSAT;i++) rtk->ssat[i].fix[0]=0;
-
     /* clear stale solution status before attempting a new PPP epoch */
     rtk->sol.stat=SOLQ_NONE;
     rtk->sol.ns=0;
+    rtk->sol.age=0.0f;
+    rtk->sol.ratio=0.0f;
     
     /* temporal update of states */
     udstate_ppp(rtk,obs,n,nav);
