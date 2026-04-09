@@ -23,18 +23,21 @@ if(NOT result EQUAL 0)
     message(FATAL_ERROR "rnx2rtkp kinematic regression command failed: ${result}")
 endif()
 
-file(READ "${BASELINE_FILE}" expected)
-file(READ "${output_file}" actual)
+execute_process(
+    COMMAND powershell -NoProfile -ExecutionPolicy Bypass
+            -File "${SOURCE_DIR}/test/regression/compare_rnx2rtkp_pos.ps1"
+            -Baseline "${BASELINE_FILE}"
+            -Actual "${output_file}"
+    RESULT_VARIABLE compare_result
+    OUTPUT_VARIABLE compare_stdout
+    ERROR_VARIABLE compare_stderr
+)
 
-string(REPLACE "\r\n" "\n" expected "${expected}")
-string(REPLACE "\r\n" "\n" actual "${actual}")
-string(REPLACE "\\" "/" expected "${expected}")
-string(REPLACE "\\" "/" actual "${actual}")
-
-if(NOT expected STREQUAL actual)
+if(NOT compare_result EQUAL 0)
     message(FATAL_ERROR
         "rnx2rtkp relative-kinematic regression output differs from baseline\n"
         "Expected: ${BASELINE_FILE}\n"
-        "Actual:   ${output_file}"
+        "Actual:   ${output_file}\n"
+        "${compare_stdout}${compare_stderr}"
     )
 endif()
