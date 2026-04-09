@@ -48,7 +48,8 @@ dialogs during automated test runs.
   `t_atmos`, `t_misc`, `t_preceph`, `t_gloeph`, `t_geoid`, `t_ppp`,
   `t_ionex`, `t_stec`, `t_tle`.
 - Numerical regression tests: `regression_rnx2rtkp_single`,
-  `regression_rnx2rtkp_kinematic`.
+  `regression_rnx2rtkp_kinematic`, `regression_rnx2rtkp_ppp_static`,
+  `regression_rnx2rtkp_ppp_kinematic`.
 
 ### Notes
 
@@ -62,6 +63,10 @@ dialogs during automated test runs.
 - `regression_rnx2rtkp_kinematic` runs `rnx2rtkp -p 2` with bundled rover/base
   RINEX observations to cover the relative positioning and ambiguity-resolution
   path.
+- `regression_rnx2rtkp_ppp_static` runs `rnx2rtkp -p 7` with bundled sample
+  RINEX observation and navigation data to cover the PPP static path.
+- `regression_rnx2rtkp_ppp_kinematic` runs `rnx2rtkp -p 6` with the same
+  bundled sample data to cover the PPP kinematic path.
 - `estiono` is kept as an explicit unsupported historical-draft command because
   the upstream source was incomplete. Maintained ionosphere/STEC paths should
   use `geniono` or `genstec`.

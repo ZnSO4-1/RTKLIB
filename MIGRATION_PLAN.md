@@ -24,8 +24,8 @@ algorithm-focused C++ baseline.
 
 ### Next Work
 
-- Expand numerical regression coverage with more PPP, static, longer
-  kinematic, and multi-constellation datasets.
+- Expand numerical regression coverage with longer kinematic, precise-product,
+  and multi-constellation datasets.
 - Decide whether the public API should continue to preserve C linkage or move
   toward a native C++ API.
 - Add modern C++ wrappers only after the compatibility layer is stable.

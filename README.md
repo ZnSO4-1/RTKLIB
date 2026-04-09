@@ -27,8 +27,9 @@ is intended primarily for algorithm development and command-line workflows.
 - Main command-line programs are covered: `rnx2rtkp`, `rtkrcv`, `convbin`,
   `str2str`, and `pos2kml`.
 - Major utility targets and upstream unit tests are registered with CTest.
-- Numerical regression baselines are included for `rnx2rtkp` single-point and
-  relative-kinematic positioning using bundled RINEX sample data.
+- Numerical regression baselines are included for `rnx2rtkp` single-point,
+  relative-kinematic, PPP-static, and PPP-kinematic runs using bundled sample
+  data.
 - Windows/MSVC Debug and Release builds are checked by GitHub Actions.
 
 ### Build

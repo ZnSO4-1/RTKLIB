@@ -35,8 +35,8 @@ sources as C++.
 ### Tests and Tools
 
 - `test/utest`: upstream unit tests registered with CTest.
-- `test/regression`: committed numerical regression baselines for single-point
-  and relative-kinematic `rnx2rtkp` runs.
+- `test/regression`: committed numerical regression baselines for single-point,
+  relative-kinematic, PPP-static, and PPP-kinematic `rnx2rtkp` runs.
 - `util`: auxiliary conversion, simulation, ionosphere, STEC, CRC, and
   ephemeris tools.
 
