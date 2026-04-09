@@ -86,13 +86,13 @@ extern void pppoutsolstat(rtk_t *rtk, int level, FILE *fp)
     double tow,pos[3],vel[3],acc[3];
     int i,j,week,nfreq=1;
     char id[32];
-    
+
     if (level<=0||!fp) return;
-    
+
     trace(3,"pppoutsolstat:\n");
-    
+
     tow=time2gpst(rtk->sol.time,&week);
-    
+
     /* receiver position */
     fprintf(fp,"$POS,%d,%.3f,%d,%.4f,%.4f,%.4f,%.4f,%.4f,%.4f\n",week,tow,
             rtk->sol.stat,rtk->x[0],rtk->x[1],rtk->x[2],0.0,0.0,0.0);
@@ -541,8 +541,6 @@ static int corr_ion(gtime_t time, const nav_t *nav, int sat, const double *pos,
 #ifdef EXTSTEC
     double rate;
 #endif
-    if (brk) *brk=0;
-
     /* sbas ionosphere model */
     if (ionoopt==IONOOPT_SBAS) {
         return sbsioncorr(time,nav,pos,azel,ion,var);
@@ -581,7 +579,6 @@ static int corrmeas(const obsd_t *obs, const nav_t *nav, const double *pos,
     trace(4,"corrmeas:\n");
     
     meas[0]=meas[1]=var[0]=var[1]=0.0;
-    if (brk) *brk=0;
     
     /* iono-free LC */
     if (opt->ionoopt==IONOOPT_IFLC) {
@@ -633,22 +630,6 @@ static double gfmeas(const obsd_t *obs, const nav_t *nav)
     if (lam[0]==0.0||lam[1]==0.0||obs->L[0]==0.0||obs->L[1]==0.0) return 0.0;
     
     return lam[0]*obs->L[0]-lam[1]*obs->L[1];
-}
-/* reset per-epoch PPP satellite status --------------------------------------*/
-static void reset_ppp_epoch_status(rtk_t *rtk)
-{
-    int i;
-
-    for (i=0;i<MAXSAT;i++) {
-        rtk->ssat[i].vs    =0;
-        rtk->ssat[i].azel[0]=0.0;
-        rtk->ssat[i].azel[1]=0.0;
-        rtk->ssat[i].vsat[0]=0;
-        rtk->ssat[i].fix [0]=0;
-        rtk->ssat[i].snr [0]=0;
-        rtk->ssat[i].resp[0]=0.0;
-        rtk->ssat[i].resc[0]=0.0;
-    }
 }
 /* temporal update of position -----------------------------------------------*/
 static void udpos_ppp(rtk_t *rtk)
@@ -790,7 +771,6 @@ static void udbias_ppp(rtk_t *rtk, const obsd_t *obs, int n, const nav_t *nav)
     for (i=k=0;i<n&&i<MAXOBS;i++) {
         sat=obs[i].sat;
         j=IB(sat,&rtk->opt);
-        brk=0;
         if (!corrmeas(obs+i,nav,pos,rtk->ssat[sat-1].azel,&rtk->opt,NULL,NULL,
                       0.0,meas,var,&brk)) continue;
         
@@ -929,9 +909,6 @@ static int res_ppp(int iter, const obsd_t *obs, int n, const double *rs,
         /* geometric distance/azimuth/elevation angle */
         if ((r=geodist(rs+i*6,rr,e))<=0.0||
             satazel(pos,e,azel+i*2)<opt->elmin) continue;
-        rtk->ssat[sat-1].vs=1;
-        rtk->ssat[sat-1].azel[0]=azel[i*2];
-        rtk->ssat[sat-1].azel[1]=azel[1+i*2];
         
         /* excluded satellite? */
         if (satexclude(obs[i].sat,svh[i],opt)) continue;
@@ -961,7 +938,6 @@ static int res_ppp(int iter, const obsd_t *obs, int n, const double *rs,
         if (opt->posopt[2]) {
             windupcorr(rtk->sol.time,rs+i*6,rr,&rtk->ssat[sat-1].phw);
         }
-        brk=0;
         /* ionosphere and antenna phase corrected measurements */
         if (!corrmeas(obs+i,nav,pos,azel+i*2,&rtk->opt,dantr,dants,
                       rtk->ssat[sat-1].phw,meas,varm,&brk)) {
@@ -1043,24 +1019,10 @@ extern void pppos(rtk_t *rtk, const obsd_t *obs, int n, const nav_t *nav)
     int i,nv,info,svh[MAXOBS],stat=SOLQ_SINGLE;
     
     trace(3,"pppos   : nx=%d n=%d\n",rtk->nx,n);
-
-    reset_ppp_epoch_status(rtk);
-
-    if (!obs||!nav||n<=0) {
-        trace(2,"pppos: no valid observation epoch\n");
-        rtk->sol.stat=SOLQ_NONE;
-        rtk->sol.ns=0;
-        rtk->sol.age=0.0f;
-        rtk->sol.ratio=0.0f;
-        return;
-    }
+    
     rs=mat(6,n); dts=mat(2,n); var=mat(1,n); azel=zeros(2,n);
-
-    /* clear stale solution status before attempting a new PPP epoch */
-    rtk->sol.stat=SOLQ_NONE;
-    rtk->sol.ns=0;
-    rtk->sol.age=0.0f;
-    rtk->sol.ratio=0.0f;
+    
+    for (i=0;i<MAXSAT;i++) rtk->ssat[i].fix[0]=0;
     
     /* temporal update of states */
     udstate_ppp(rtk,obs,n,nav);

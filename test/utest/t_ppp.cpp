@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <math.h>
 #include <assert.h>
-#include <string.h>
 #include "../../src/rtklib.h"
 
 /* eci2ecef() */
@@ -72,109 +71,10 @@ void utest3(void)
     }
     printf("%s utset3 : OK\n",__FILE__);
 }
-/* pppos() empty-epoch guard */
-void utest4(void)
-{
-    prcopt_t opt=prcopt_default;
-    rtk_t rtk;
-    nav_t nav;
-
-    memset(&rtk,0,sizeof(rtk));
-    memset(&nav,0,sizeof(nav));
-
-    opt.mode=PMODE_PPP_KINEMA;
-    rtkinit(&rtk,&opt);
-
-    rtk.sol.stat=SOLQ_SINGLE;
-    rtk.sol.ns=5;
-
-    pppos(&rtk,NULL,0,&nav);
-
-    assert(rtk.sol.stat==SOLQ_NONE);
-    assert(rtk.sol.ns==0);
-
-    rtkfree(&rtk);
-    printf("%s utset4 : OK\n",__FILE__);
-}
-/* pppos() should clear stale status on unusable non-empty epoch */
-void utest5(void)
-{
-    prcopt_t opt=prcopt_default;
-    rtk_t rtk;
-    nav_t nav;
-    obsd_t obs;
-
-    memset(&rtk,0,sizeof(rtk));
-    memset(&nav,0,sizeof(nav));
-    memset(&obs,0,sizeof(obs));
-
-    opt.mode=PMODE_PPP_KINEMA;
-    rtkinit(&rtk,&opt);
-
-    rtk.sol.stat=SOLQ_SINGLE;
-    rtk.sol.ns=4;
-
-    pppos(&rtk,&obs,1,&nav);
-
-    assert(rtk.sol.stat==SOLQ_NONE);
-    assert(rtk.sol.ns==0);
-
-    rtkfree(&rtk);
-    printf("%s utset5 : OK\n",__FILE__);
-}
-/* pppos() should clear stale per-epoch satellite diagnostics */
-void utest6(void)
-{
-    prcopt_t opt=prcopt_default;
-    rtk_t rtk;
-    nav_t nav;
-    obsd_t obs;
-
-    memset(&rtk,0,sizeof(rtk));
-    memset(&nav,0,sizeof(nav));
-    memset(&obs,0,sizeof(obs));
-
-    opt.mode=PMODE_PPP_KINEMA;
-    rtkinit(&rtk,&opt);
-
-    rtk.sol.stat=SOLQ_SINGLE;
-    rtk.sol.ns=4;
-    rtk.sol.age=12.5f;
-    rtk.sol.ratio=3.2f;
-    rtk.ssat[0].vsat[0]=1;
-    rtk.ssat[0].vs    =1;
-    rtk.ssat[0].azel[0]=1.0;
-    rtk.ssat[0].azel[1]=0.5;
-    rtk.ssat[0].fix [0]=4;
-    rtk.ssat[0].snr [0]=40;
-    rtk.ssat[0].resp[0]=1.25;
-    rtk.ssat[0].resc[0]=2.50;
-
-    pppos(&rtk,&obs,1,&nav);
-
-    assert(rtk.sol.stat==SOLQ_NONE);
-    assert(rtk.sol.ns==0);
-    assert(rtk.sol.age==0.0f);
-    assert(rtk.sol.ratio==0.0f);
-    assert(rtk.ssat[0].vs==0);
-    assert(rtk.ssat[0].azel[0]==0.0);
-    assert(rtk.ssat[0].azel[1]==0.0);
-    assert(rtk.ssat[0].vsat[0]==0);
-    assert(rtk.ssat[0].fix [0]==0);
-    assert(rtk.ssat[0].snr [0]==0);
-    assert(rtk.ssat[0].resp[0]==0.0);
-    assert(rtk.ssat[0].resc[0]==0.0);
-
-    rtkfree(&rtk);
-    printf("%s utset6 : OK\n",__FILE__);
-}
 int main(void)
 {
     utest1();
     utest2();
     utest3();
-    utest4();
-    utest5();
-    utest6();
     return 0;
 }

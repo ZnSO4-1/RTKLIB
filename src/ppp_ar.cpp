@@ -42,7 +42,7 @@ static const char rcsid[]="$Id:$";
 static double lam_LC(int i, int j, int k)
 {
     const double f1=FREQ1,f2=FREQ2,f5=FREQ5;
-    
+
     return CLIGHT/(i*f1+j*f2+k*f5);
 }
 /* carrier-phase LC (m) ------------------------------------------------------*/
@@ -50,7 +50,7 @@ static double L_LC(int i, int j, int k, const double *L)
 {
     const double f1=FREQ1,f2=FREQ2,f5=FREQ5;
     double L1,L2,L5;
-    
+
     if ((i&&!L[0])||(j&&!L[1])||(k&&!L[2])) {
         return 0.0;
     }
@@ -358,7 +358,7 @@ static int fix_amb_ROUND(rtk_t *rtk, int *sat1, int *sat2, const int *NW, int n)
 static int fix_amb_ILS(rtk_t *rtk, int *sat1, int *sat2, int *NW, int n)
 {
     double C1,C2,*B1,*N1,*NC,*D,*E,*Q,s[2],lam_NL=lam_LC(1,1,0),lam1,lam2;
-    int i,j,k,m=0,info,stat=0,flgs[MAXSAT]={0},max_flg=0;
+    int i,j,k,m=0,info,stat,flgs[MAXSAT]={0},max_flg=0;
     
     lam1=lam_carr[0]; lam2=lam_carr[1];
     
@@ -391,10 +391,7 @@ static int fix_amb_ILS(rtk_t *rtk, int *sat1, int *sat2, int *NW, int n)
         sat2[m]=sat2[i];
         NW[m++]=NW[i];
     }
-    if (m<3) {
-        stat=0;
-        goto cleanup;
-    }
+    if (m<3) return 0;
     
     /* covariance of narrow-lane ambiguities */
     matmul("TN",m,rtk->nx,rtk->nx,1.0,D,rtk->P,0.0,E);
@@ -403,21 +400,16 @@ static int fix_amb_ILS(rtk_t *rtk, int *sat1, int *sat2, int *NW, int n)
     /* integer least square */
     if ((info=lambda(m,2,B1,Q,N1,s))) {
         trace(2,"lambda error: info=%d\n",info);
-        stat=0;
-        goto cleanup;
+        return 0;
     }
-    if (s[0]<=0.0) {
-        stat=0;
-        goto cleanup;
-    }
+    if (s[0]<=0.0) return 0;
     
     rtk->sol.ratio=(float)(MIN(s[1]/s[0],999.9));
     
     /* varidation by ratio-test */
     if (rtk->opt.thresar[0]>0.0&&rtk->sol.ratio<rtk->opt.thresar[0]) {
         trace(2,"varidation error: n=%2d ratio=%8.3f\n",m,rtk->sol.ratio);
-        stat=0;
-        goto cleanup;
+        return 0;
     }
     trace(2,"varidation ok: %s n=%2d ratio=%8.3f\n",time_str(rtk->sol.time,0),m,
           rtk->sol.ratio);
@@ -428,8 +420,7 @@ static int fix_amb_ILS(rtk_t *rtk, int *sat1, int *sat2, int *NW, int n)
     }
     /* fixed solution */
     stat=fix_sol(rtk,sat1,sat2,NC,m);
-
-cleanup:
+    
     free(B1); free(N1); free(D); free(E); free(Q); free(NC);
     
     return stat;
