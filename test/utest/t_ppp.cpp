@@ -142,6 +142,9 @@ void utest6(void)
     rtk.sol.age=12.5f;
     rtk.sol.ratio=3.2f;
     rtk.ssat[0].vsat[0]=1;
+    rtk.ssat[0].vs    =1;
+    rtk.ssat[0].azel[0]=1.0;
+    rtk.ssat[0].azel[1]=0.5;
     rtk.ssat[0].fix [0]=4;
     rtk.ssat[0].snr [0]=40;
     rtk.ssat[0].resp[0]=1.25;
@@ -153,6 +156,9 @@ void utest6(void)
     assert(rtk.sol.ns==0);
     assert(rtk.sol.age==0.0f);
     assert(rtk.sol.ratio==0.0f);
+    assert(rtk.ssat[0].vs==0);
+    assert(rtk.ssat[0].azel[0]==0.0);
+    assert(rtk.ssat[0].azel[1]==0.0);
     assert(rtk.ssat[0].vsat[0]==0);
     assert(rtk.ssat[0].fix [0]==0);
     assert(rtk.ssat[0].snr [0]==0);

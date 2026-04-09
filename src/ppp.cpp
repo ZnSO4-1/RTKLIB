@@ -640,6 +640,9 @@ static void reset_ppp_epoch_status(rtk_t *rtk)
     int i;
 
     for (i=0;i<MAXSAT;i++) {
+        rtk->ssat[i].vs    =0;
+        rtk->ssat[i].azel[0]=0.0;
+        rtk->ssat[i].azel[1]=0.0;
         rtk->ssat[i].vsat[0]=0;
         rtk->ssat[i].fix [0]=0;
         rtk->ssat[i].snr [0]=0;
@@ -926,6 +929,9 @@ static int res_ppp(int iter, const obsd_t *obs, int n, const double *rs,
         /* geometric distance/azimuth/elevation angle */
         if ((r=geodist(rs+i*6,rr,e))<=0.0||
             satazel(pos,e,azel+i*2)<opt->elmin) continue;
+        rtk->ssat[sat-1].vs=1;
+        rtk->ssat[sat-1].azel[0]=azel[i*2];
+        rtk->ssat[sat-1].azel[1]=azel[1+i*2];
         
         /* excluded satellite? */
         if (satexclude(obs[i].sat,svh[i],opt)) continue;
